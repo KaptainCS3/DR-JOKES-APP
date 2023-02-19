@@ -7,6 +7,7 @@ function classNames(...classes) {
 }
 
 export default function Example(props) {
+  
   const styles = {
     width: props.width,
   };
