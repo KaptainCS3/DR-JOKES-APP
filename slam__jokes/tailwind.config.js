@@ -3,7 +3,11 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      // transitionProperty: {
+      //   height: "width",
+      // },
+    },
     screens: {
       sm: { min: "200px", max: "475px" },
       // => @media (min-width: 200px and max-width: 475px) { ... }
