@@ -6,11 +6,9 @@ const Reaction = () => {
   const thumbsUp = () => {
     return setLike(!like);
   };
-  console.log(`like value is ${like}`);
   const thumbsDown = () => {
     return setDisLike(!disLike);
   };
-  console.log(`dislike value is ${disLike}`);
   return (
     <div className="flex justify-between w-full my-4 mx-auto">
       <div className="arrow__indicator left text-[#6200EE] font-bold text-2xl">
