@@ -5,7 +5,7 @@ const Comment = () => {
     outline: "none",
   };
   return (
-    <form className="w-full h-[3rem] flex justify-between items-center px-2 rounded shadow">
+    <form className="w-full h-[3rem] flex justify-between items-center px-2 rounded shadow bg-white">
       <div className="py-[2.5rem w-[80%]">
         <input
           type="text"
