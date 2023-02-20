@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-import Indicator from "./Indicator";
 import Reaction from "./Reaction";
 import Comment from "./Comment";
 import JokeContainer from "./JokeContainer";
 import joke from "../jokes";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
+import ChevronLeft from "./ChevronLeft";
+import RandomJokeBtn from "./RandomJokeBtn";
+import ChevronRight from "./ChevronRight";
 const Jokes = () => {
-  // // The review is same as a carousel you know in css and normal js
+  // The review is same as a carousel you know in css and normal js
   const [index, setIndex] = useState(0);
   const { punchline, body, id } = joke[index];
   // This function helps us check and make sure we dont go above the lenght of our array and below its lenght
@@ -60,28 +57,9 @@ const Jokes = () => {
         <JokeContainer punchline={punchline} id={id} body={body} />
       </>
       <div className={`flex justify-between w-full mx-auto mt-4`}>
-        <div className={`arrow__indicator left mt-2`}>
-          <FontAwesomeIcon
-            icon={faChevronLeft}
-            className={`cursor-pointer text-2xl`}
-            onClick={prevJoke}
-          />
-        </div>
-        <div className={`button-container`}>
-          <button
-            onClick={randomJoke}
-            className={`p-2 bg-[#6200EE] text-white rounded-xl`}
-          >
-            random Joke
-          </button>
-        </div>
-        <div className={`arrow__indicator right mt-2`}>
-          <FontAwesomeIcon
-            icon={faChevronRight}
-            className={`cursor-pointer text-2xl`}
-            onClick={nextJoke}
-          />
-        </div>
+        <ChevronLeft prevJoke={prevJoke} />
+        <RandomJokeBtn randomJoke={randomJoke} />
+        <ChevronRight nextJoke={nextJoke} />
       </div>
       <Reaction />
       <Comment />
