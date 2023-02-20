@@ -1,54 +1,105 @@
-const jokes = [
+const jokesTemplate = [
   {
     id: 1,
-    punchline: "some random text",
-    body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+    category: {
+      name: "African Jokes",
+      img: "",
+    },
+    joke: [
+      {
+        id: 1,
+        author: "KaptainCS3",
+        comment: "Example Big brother thats dope bro",
+        likes: 20,
+        joke: "stay up late to watch people sleeping young dum",
+      },
+    ],
+    // punchline: "some random text",
+    // body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
   },
   {
     id: 2,
-    punchline: "some random text",
-    body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+    category: {
+      name: "Western World Jokes",
+      img: "",
+    },
+    joke: [
+      {
+        id: 1,
+        author: "KaptainCS3",
+        comment: "Example Big brother thats dope bro",
+        likes: 20,
+        joke: "stay up late to watch people sleeping young dum",
+      },
+    ],
+    // punchline: "some random text",
+    // body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
   },
   {
     id: 3,
-    punchline: "some random text",
-    body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+    category: {
+      name: "Family Jokes",
+      img: "",
+    },
+    joke: [
+      {
+        id: 1,
+        author: "KaptainCS3",
+        comment: "Example Big brother thats dope bro",
+        likes: 20,
+        joke: "stay up late to watch people sleeping young dum",
+      },
+    ],
+    // punchline: "some random text",
+    // body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
   },
   {
     id: 4,
-    punchline: "some random text",
-    body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+    category: {
+      name: "Relationship Jokes",
+      img: "",
+    },
+    joke: [
+      {
+        id: 1,
+        author: "KaptainCS3",
+        comment: "Example Big brother thats dope bro",
+        likes: 20,
+        joke: "stay up late to watch people sleeping young dum",
+      },
+    ],
   },
   {
     id: 5,
-    punchline: "some random text",
-    body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+    category: {
+      name: "Education Jokes",
+      img: "",
+    },
+    joke: [
+      {
+        id: 1,
+        author: "KaptainCS3",
+        comment: "Example Big brother thats dope bro",
+        likes: 20,
+        joke: "stay up late to watch people sleeping young dum",
+      },
+    ],
   },
   {
     id: 6,
-    punchline: "some random text",
-    body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
-  },
-  {
-    id: 7,
-    punchline: "some random text",
-    body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
-  },
-  {
-    id: 8,
-    punchline: "some random text",
-    body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
-  },
-  {
-    id: 9,
-    punchline: "some random text",
-    body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
-  },
-  {
-    id: 10,
-    punchline: "some random text",
-    body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+    category: {
+      name: "Tech Jokes",
+      img: "",
+    },
+    joke: [
+      {
+        id: 1,
+        author: "KaptainCS3",
+        comment: "Example Big brother thats dope bro",
+        likes: 20,
+        joke: "stay up late to watch people sleeping young dum",
+      },
+    ],
   },
 ];
-
-export default jokes
+export default jokesTemplate;
