@@ -4,8 +4,8 @@ import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
   return (
-    <footer className="sm:hidden md:w-full h-[7rem] bg-[#6200EE] flex justify-between items-center px-4 lg:hidden">
-      <div className="font-bold text-white">
+    <footer className="bg-[#6200EE] dark:bg-slate-800 sm:hidden md:w-full h-[7rem] flex justify-between items-center px-4 lg:hidden">
+      <div className="font-bold text-white dark:text-slate-400">
         <p>
           <button>About</button>
         </p>
@@ -18,7 +18,7 @@ const Footer = () => {
           <button>Terms and conditions</button>
         </p>
       </div>
-      <div className="w-16 h-16 rounded-full bg-[#000] text-white flex justify-center items-center text-4xl">
+      <div className="bg-[#000] dark:text-dark bg-white w-16 h-16 rounded-full text-white flex justify-center items-center text-4xl">
         <FontAwesomeIcon icon={faQuestion} />
       </div>
     </footer>
