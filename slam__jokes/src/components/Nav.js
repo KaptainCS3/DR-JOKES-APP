@@ -5,12 +5,9 @@ import {
   faChevronDown,
   faClose,
 } from "@fortawesome/free-solid-svg-icons";
-import moon from "../assets/icon-moon.svg";
-import sun from "../assets/icon-sun.svg";
-import Example from "./Example";
-import styles from "../styles/Nav.module.css";
-const Nav = () => {
-  // const categoriesData = categories
+import DropDown from "./DropDown";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
+const Nav = (props) => {
   const [isNavBar, setIsNavBar] = useState(false);
   const showNav = () => {
     setIsNavBar(true);
@@ -18,9 +15,16 @@ const Nav = () => {
   const hideNav = () => {
     setIsNavBar(false);
   };
-  console.log(isNavBar);
+  const nav = {
+    flexDirection: "row",
+  };
   return (
-    <nav className="bg-[#6200EE] dark:bg-[#121212] nav sm:bg-[#6200EE] flex justify-between items-center h-12 w-full px-4 md:w-full py-10 flex lg:w-1/4">
+    //Main nav bar
+    <nav
+      style={nav}
+      className={`dark:bg-[#121212] bg-[#6200EE] nav w-full flex sm:w-full h-12 justify-between items-center px-4 md:w-full h-16 py-10 lg:min-h-[100vh] w-1/5 flex-col justify-start`}
+    >
+      {/* display on small screen and mobile */}
       <div className="hamburger__menu md:hidden lg:hidden">
         <FontAwesomeIcon
           icon={faBars}
@@ -28,39 +32,16 @@ const Nav = () => {
           onClick={showNav}
         />
       </div>
-      <h1 className="font-bold">
-        <span className="text-xl text-white">Slam</span>{" "}
-        <span className="text-xl text-white">Jokes</span>
-        <sup className="text-xl text-white">++</sup>
+      <h1 className="font-bold cursor-pointer lg:h-1/6">
+        <span className="text-xl text-[#03DAC6] dark:text-gray-200">Slam</span>{" "}
+        <span className="text-xl text-white dark:text-gray-200">Jokes</span>
+        <sup className="text-xl text-white dark:text-gray-200">++</sup>
       </h1>
-      <div className="table__view w-[70%] text-white font-bold flex justify-between sm:hidden lg:hidden">
-        <>
-          <button>
-            <Example
-              width="25rem"
-              text="CREATE JOKE"
-              header="CREATE JOKE/RIDDLE"
-            />
-            <FontAwesomeIcon icon={faChevronDown} className="pl-2" />
-          </button>
-          <button>
-            <Example width="30rem" text="CATEGORIES" header="CATEGORIES" />
-            <FontAwesomeIcon icon={faChevronDown} className="pl-2" />
-          </button>
-          <button>
-            <Example width="25rem" text="SETTINGS" header="SETTINGS" />
-            <FontAwesomeIcon icon={faChevronDown} className="pl-2" />
-          </button>
-        </>
-        <div className="mode">
-          <img src={moon} alt="moon" />
-        </div>
-      </div>
-      {/* "sm:absolute top-0 left-0 w-[70%] h-full bg-[#6200EE] text-white" */}
+      {/* toggle open nav bar*/}
       <div
         className={
           isNavBar
-            ? "sm:absolute top-0 left-0 w-[70%] min-h-[120%] bg-[#6200EE] text-white"
+            ? `sm:transition-[width] ease-in-out delay-150 absolute top-0 left-0 w-[70%] min-h-[120%] bg-[#6200EE] text-white dark:bg-[#121212] text-gray-200 md:hidden lg:hidden`
             : "hidden"
         }
       >
@@ -72,23 +53,61 @@ const Nav = () => {
           />
           <div className="sm:flex flex-col md:hidden lg:hidden">
             <div className="mt-12">
-              {/* <p className="pt-4">Categories</p> */}
-              <Example />
+              {/* <DropDown /> */}
+              <p className="pt-4">Categories</p>
               <p className="pt-4">Create Jokes</p>
               <p className="pt-4">
-                {/* <label htmlFor="theme">Dark</label>
-                <input type="radio" id="theme" /> */}
-                <label className={styles.toggleDarkBtn}>
-                  <input type="checkbox" />
-                  <span
-                    className={`${styles.slideBtnTg} ${styles.round}`}
-                  >Theme</span>
-                </label>
+                {/* toggle dark mode */}
+                <DarkModeSwitch
+                  style={{ marginBottom: "2rem" }}
+                  checked={props.isDarkMode}
+                  onChange={props.toggleDarkMode}
+                  size={24}
+                />
               </p>
             </div>
             <p className="mt-[20rem]">Settings</p>
           </div>
         </div>
+      </div>
+
+      {/* Nav content for medium screens  md*/}
+      <div
+        className={`table__view w-[70%] text-white dark:text-gray-300 font-bold flex justify-between sm:hidden lg:hidden`}
+      >
+        <>
+          <button>
+            <DropDown
+              width="25rem"
+              text="CREATE JOKE"
+              header="CREATE JOKE/RIDDLE"
+            />
+            <FontAwesomeIcon icon={faChevronDown} className="pl-2" />
+          </button>
+          <button>
+            <DropDown width="30rem" text="CATEGORIES" header="CATEGORIES" />
+            <FontAwesomeIcon icon={faChevronDown} className="pl-2" />
+          </button>
+          <button>
+            <DropDown width="25rem" text="SETTINGS" header="SETTINGS" />
+            <FontAwesomeIcon icon={faChevronDown} className="pl-2" />
+          </button>
+        </>
+        <div className="mode">
+          <DarkModeSwitch
+            checked={props.isDarkMode}
+            onChange={props.toggleDarkMode}
+            size={30}
+          />
+        </div>
+      </div>
+
+      {/* Nav content for large screens lg */}
+
+      <div className="hamburger__menu text-white h-5/6 md:hidden sm:hidden">
+        <button className="block">Categories</button>
+        <button className="block">Categories</button>
+        <button className="block">Categories</button>
       </div>
     </nav>
   );
