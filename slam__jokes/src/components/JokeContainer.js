@@ -8,7 +8,7 @@ const JokeContainer = (props) => {
     >
       <h4 className={`mb-[0.25rem] font-bold`}>{props.punchline}</h4>
       <p className={`mb-[0.75rem]`}>
-        {props.body} {props.id}
+        {props.body} and category is {props.category.name}
       </p>
     </article>
   );
