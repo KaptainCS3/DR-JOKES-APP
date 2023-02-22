@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import DropDown from "./DropDown";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
+import CategorySelect from "./CategorySelect";
 const Nav = (props) => {
   const [isNavBar, setIsNavBar] = useState(false);
   const showNav = () => {
@@ -54,7 +55,13 @@ const Nav = (props) => {
           <div className="sm:flex flex-col md:hidden lg:hidden">
             <div className="mt-12">
               {/* <DropDown /> */}
-              <p className="pt-4">Categories</p>
+              <p className="pt-4">
+                <CategorySelect
+                  handleChange={props.handleChange}
+                  selectCategory={props.selectCategory}
+                  setSelectedCategory={props.setSelectedCategory}
+                />
+              </p>
               <p className="pt-4">Create Jokes</p>
               <p className="pt-4">
                 {/* toggle dark mode */}
@@ -85,8 +92,9 @@ const Nav = (props) => {
             <FontAwesomeIcon icon={faChevronDown} className="pl-2" />
           </button>
           <button>
-            <DropDown width="30rem" text="CATEGORIES" header="CATEGORIES" />
-            <FontAwesomeIcon icon={faChevronDown} className="pl-2" />
+            <CategorySelect />
+            {/* <DropDown width="30rem" text="CATEGORIES" header="CATEGORIES" /> */}
+            {/* <FontAwesomeIcon icon={faChevronDown} className="pl-2" /> */}
           </button>
           <button>
             <DropDown width="25rem" text="SETTINGS" header="SETTINGS" />
@@ -105,9 +113,11 @@ const Nav = (props) => {
       {/* Nav content for large screens lg */}
 
       <div className="hamburger__menu text-white h-5/6 md:hidden sm:hidden">
-        <button className="block">Categories</button>
-        <button className="block">Categories</button>
-        <button className="block">Categories</button>
+        <button className="block">Create Joke</button>
+        <button className="block">
+          <CategorySelect />
+        </button>
+        <button className="block">Settings</button>
       </div>
     </nav>
   );
