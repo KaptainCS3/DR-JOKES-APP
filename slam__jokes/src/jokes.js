@@ -9,13 +9,118 @@ const jokesTemplate = [
       {
         id: 1,
         author: "KaptainCS3",
-        comment: "Example Big brother thats dope bro",
-        likes: 20,
-        joke: "stay up late to watch people sleeping young dum",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 2,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 3,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 4,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 5,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 6,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
       },
     ],
-    // punchline: "some random text",
-    // body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
   },
   {
     id: 2,
@@ -27,13 +132,118 @@ const jokesTemplate = [
       {
         id: 1,
         author: "KaptainCS3",
-        comment: "Example Big brother thats dope bro",
-        likes: 20,
-        joke: "stay up late to watch people sleeping young dum",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 2,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 3,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 4,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 5,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 6,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
       },
     ],
-    // punchline: "some random text",
-    // body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
   },
   {
     id: 3,
@@ -45,27 +255,239 @@ const jokesTemplate = [
       {
         id: 1,
         author: "KaptainCS3",
-        comment: "Example Big brother thats dope bro",
-        likes: 20,
-        joke: "stay up late to watch people sleeping young dum",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 2,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 3,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 4,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 5,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 6,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
       },
     ],
-    // punchline: "some random text",
-    // body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
   },
   {
     id: 4,
     category: {
-      name: "Relationship Jokes",
+      name: "RelationshipJokes",
       img: "",
     },
     joke: [
       {
         id: 1,
         author: "KaptainCS3",
-        comment: "Example Big brother thats dope bro",
-        likes: 20,
-        joke: "stay up late to watch people sleeping young dum",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 2,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 3,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 4,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 5,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 6,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
       },
     ],
   },
@@ -79,9 +501,116 @@ const jokesTemplate = [
       {
         id: 1,
         author: "KaptainCS3",
-        comment: "Example Big brother thats dope bro",
-        likes: 20,
-        joke: "stay up late to watch people sleeping young dum",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 2,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 3,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 4,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 5,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 6,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
       },
     ],
   },
@@ -95,9 +624,116 @@ const jokesTemplate = [
       {
         id: 1,
         author: "KaptainCS3",
-        comment: "Example Big brother thats dope bro",
-        likes: 20,
-        joke: "stay up late to watch people sleeping young dum",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 2,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 3,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 4,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 5,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
+      },
+      {
+        id: 6,
+        author: "KaptainCS3",
+        punchline: "some random text",
+        body: "this is the content of the joke do you wish to add anything silly to it guest no!!",
+        comment: [
+          {
+            user: "user 3",
+            comment: "stay up late to watch people sleeping young dum",
+            id: "",
+          },
+        ],
+        likes: {
+          id: "",
+          thumbsUp: "",
+          thumbsDown: "",
+          user: "user 3",
+        },
       },
     ],
   },
