@@ -11,13 +11,13 @@ const Reaction = () => {
   };
   return (
     <div className="flex justify-between w-full my-4 mx-auto">
-      <div className="arrow__indicator left text-[#6200EE] font-bold text-2xl">
+      <div className="arrow__indicator left text-[#6200EE] font-bold text-2xl dark:text-white">
         <span>{like && !disLike ? "1" : ""}</span>
         <span className="cursor-pointer" onClick={thumbsUp}>
           👍
         </span>
       </div>
-      <div className="arrow__indicator right text-[#6200EE] font-bold text-2xl">
+      <div className="arrow__indicator right text-[#6200EE] font-bold text-2xl dark:text-white">
         <span>{disLike && !like ? "1" : ""}</span>
         <span className="cursor-pointer" onClick={thumbsDown}>
           👎{" "}
