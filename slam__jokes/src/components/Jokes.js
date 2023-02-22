@@ -6,11 +6,30 @@ import joke from "../jokes";
 import ChevronLeft from "./ChevronLeft";
 import RandomJokeBtn from "./RandomJokeBtn";
 import ChevronRight from "./ChevronRight";
-const Jokes = () => {
+import jokesTemplate from "../jokes";
+const Jokes = (props) => {
+  const object = joke.map((el) => {
+    if (props.selectCategory === el.category.name) {
+      console.log(el.category.name);
+      return el.joke.map((item) => {
+        return (
+          <JokeContainer
+            punchline={item.punchline}
+            body={item.body}
+            category={el.category}
+          />
+        );
+      });
+    } else {
+      console.log("Not found");
+    }
+  });
   // The review is same as a carousel you know in css and normal js
   const [index, setIndex] = useState(0);
-  const { punchline, body, id } = joke[index];
-  // This function helps us check and make sure we dont go above the lenght of our array and below its lenght
+  // const [boxIndex, setBoxIndex] = useState(0);
+  const { id} = joke[index];
+
+  // This function helps us check and make sure we don't go above the length of our array and below its length
   const checkNumber = (number) => {
     if (number > joke.length - 1) {
       return 0;
@@ -18,14 +37,14 @@ const Jokes = () => {
     if (number < 0) return joke.length - 1;
     return number;
   };
+  console.log(id);
+  // console.log(joke);
+  // console.log(category);
 
   // This function help us in moving to the previous element
   const prevJoke = () => {
     setIndex((index) => {
       let newIndex = index - 1;
-      // if(newIndex < 0)
-      // newIndex = 3
-      // checkNumber(newIndex)
       return checkNumber(newIndex);
     });
   };
@@ -34,9 +53,6 @@ const Jokes = () => {
   const nextJoke = () => {
     setIndex((index) => {
       let newIndex = index + 1;
-      // if(newIndex > people.length -1)
-      // newIndex = 0
-      // checkNumber(newIndex)
       return checkNumber(newIndex);
     });
   };
@@ -53,9 +69,7 @@ const Jokes = () => {
     <div
       className={`flex justify-between items-center my-8 mx-auto flex-col px-8 md:hidden lg:hidden`}
     >
-      <>
-        <JokeContainer punchline={punchline} id={id} body={body} />
-      </>
+      <>{object}</>
       <div className={`flex justify-between w-full mx-auto mt-4`}>
         <ChevronLeft prevJoke={prevJoke} />
         <RandomJokeBtn randomJoke={randomJoke} />
