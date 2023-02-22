@@ -1,27 +1,16 @@
 import React from "react";
 import Comment from "./Comment";
-import Indicator from "./RandomJokeBtn";
-import JokeContainer from "./JokeContainer";
 import Reaction from "./Reaction";
 import ChevronLeft from "./ChevronLeft";
 import ChevronRight from "./ChevronRight";
 
 const Modal = (props) => {
-  // const [showModal, setShowModal] = React.useState(false);
-  // <div className="md:block sm:hidden lg:hidden">
   return (
     <>
-      {/* <button
-          className="text-dark font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          onClick={() => setShowModal(true)}
-        >
-          Click me!!!!!!!!
-        </button> */}
       {props.showModal ? (
         <>
           <div className="flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none items-center p-8">
-            <div className="relative w-1/1 my-6 mx-auto max-w-3/4 lg:p-64 md:p-12">
+            <div className="relative w-1/1 my-6 mx-auto max-w-3/4 lg:p-32 md:p-12">
               <button
                 className="mb-8 text-black text-3xl leading-none font-bold outline-none focus:outline-none flex justify-center items-center w-full"
                 onClick={() => props.setShowModal(false)}
