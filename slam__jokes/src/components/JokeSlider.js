@@ -12,6 +12,7 @@ const JokeSlider = (props) => {
   };
   const [width, setWidth] = useState(0);
   const carousel = useRef();
+
   const jokesData = jokes.map((el) => {
     return <JokeContainer key={el.id} {...el} toggle={toggle} />;
   });
