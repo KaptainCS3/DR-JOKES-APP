@@ -1,69 +1,43 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { nanoid } from "@reduxjs/toolkit";
-import { postComment } from "../features/commentSlice";
-const Comment = () => {
-  const focus = {
-    outline: "none",
-  };
-
-  const dispatch = useDispatch();
-
-  //input state
-  const [addComment, setAddComment] = useState({
-    addComment: "",
-  });
-  //prevent page reload on submit
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setAddComment({ addComment: "" });
-  };
-
-  // track input value changes
-  const hanldeChange = (event) => {
-    const { name, value } = event.target;
-    setAddComment((prevComment) => {
-      return {
-        ...prevComment,
-        [name]: value,
-      };
-    });
-  };
-
-  //add comment to joke
-  const handlePost = () => {
-    dispatch(
-      postComment({
-        id: nanoid(),
-        comment: addComment.addComment,
-      })
-    );
-  };
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faXmark } from "@fortawesome/free-solid-svg-icons";
+const Comment = (props) => {
+  console.log(props);
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-full h-[3rem] flex justify-between items-center px-2 rounded shadow bg-white"
-    >
-      <div className="py-[2.5rem w-[80%]">
-        <input
-          type="text"
-          placeholder="Leave a comment...."
-          className="py-[.7rem] w-full"
-          style={focus}
-          name="addComment"
-          onChange={hanldeChange}
-          value={addComment.addComment}
-        />
+    // <div>
+    <section className="mt-2 mb-12 mr-2">
+      <div className="flex rounded-[.75em] bg-[#fff] h-[auto] min-h-[2.8em] shadow-none">
+        <div className="flex flex-row justify-between w-full items-center px-8">
+          {/* //! ternary operator condition check */}
+          <div
+            style={{
+              textDecoration: mark ? "line-through" : "",
+              color: mark ? "gray" : "",
+            }}
+          >
+            {/* {props.task} */}
+          </div>
+          {/* <section className="flex w-[15%] justify-between">
+              <div>
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className="cursor-pointer text-green-600"
+                  onClick={handleMark}
+                />
+              </div>
+              <div>
+                <FontAwesomeIcon
+                //   icon={faXmark}
+                  className="cursor-pointer text-red-600"
+                //   onClick={handleRemove}
+                />
+              </div>
+            </section> */}
+        </div>
       </div>
-      <div>
-        <button
-          onClick={handlePost}
-          className="text-[#6200EE] font-bold w-[20%]"
-        >
-          Post
-        </button>
-      </div>
-    </form>
+    </section>
+    // </div>
   );
 };
 
