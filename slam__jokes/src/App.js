@@ -8,19 +8,29 @@ import Footer from "./components/Footer";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import useDarkMode from "./hooks/useDarkMode";
 import JokeSlider from "./components/JokeSlider";
+import catValue from "./categoryValue";
 const App = () => {
+  //! Theme color State
   const [colorTheme, setColorTheme] = useDarkMode();
-  //select state
-  const [selectCategory, setSelectCategory] = useState("African Jokes");
+
+  //!Dark mode state
   const [isDarkMode, setDarkMode] = useState(
     colorTheme === "light" ? true : false
   );
 
+  //! Dark mode handler
   const toggleDarkMode = (checked) => {
     setColorTheme(colorTheme);
     setDarkMode(checked);
   };
-  //track select value change
+
+  //!selected category state
+  const [selectCategory, setSelectCategory] = useState("African Jokes");
+
+  //! category index state
+  const [catIndex, setCatIndex] = useState(0);
+
+  //!track selected category value change
   const handleChange = (e) => {
     setSelectCategory(e.target.value);
   };
@@ -46,11 +56,26 @@ const App = () => {
             onChange={toggleDarkMode}
           />
         </div>
-        <Jokes selectCategory={selectCategory} />
+        <Jokes
+          selectCategory={selectCategory}
+          catValue={catValue}
+          catIndex={catIndex}
+          setCatIndex={setCatIndex}
+        />
         <CreateJoke />
         <div>
-          <JokeSlider />
-          <JokeSlider />
+          <JokeSlider
+            selectCategory={selectCategory}
+            catValue={catValue}
+            catIndex={catIndex}
+            setCatIndex={setCatIndex}
+          />
+          <JokeSlider
+            selectCategory={selectCategory}
+            catValue={catValue}
+            catIndex={catIndex}
+            setCatIndex={setCatIndex}
+          />
         </div>
       </main>
       <Footer />
