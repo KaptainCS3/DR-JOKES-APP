@@ -16,14 +16,10 @@ const Nav = (props) => {
   const hideNav = () => {
     setIsNavBar(false);
   };
-  const nav = {
-    flexDirection: "row",
-  };
   return (
     //Main nav bar
     <nav
-      style={nav}
-      className={`dark:bg-[#121212] bg-[#6200EE] nav w-full flex sm:w-full h-12 justify-between items-center px-4 md:w-full h-16 py-10 lg:min-h-[100vh] w-1/5 flex-col justify-start`}
+      className={`dark:bg-[#121212] bg-[#6200EE] nav w-full flex min-h-0 sm:flex-row h-12 justify-between items-center px-4 md:flex-row h-16 py-10 lg:min-h-[100vh] flex-col justify-start`}
     >
       {/* display on small screen and mobile */}
       <div className="hamburger__menu md:hidden lg:hidden">
@@ -92,9 +88,11 @@ const Nav = (props) => {
             <FontAwesomeIcon icon={faChevronDown} className="pl-2" />
           </button>
           <button>
-            <CategorySelect />
-            {/* <DropDown width="30rem" text="CATEGORIES" header="CATEGORIES" /> */}
-            {/* <FontAwesomeIcon icon={faChevronDown} className="pl-2" /> */}
+            <CategorySelect
+              handleChange={props.handleChange}
+              selectCategory={props.selectCategory}
+              setSelectedCategory={props.setSelectedCategory}
+            />
           </button>
           <button>
             <DropDown width="25rem" text="SETTINGS" header="SETTINGS" />
@@ -115,7 +113,11 @@ const Nav = (props) => {
       <div className="hamburger__menu text-white h-5/6 md:hidden sm:hidden">
         <button className="block">Create Joke</button>
         <button className="block">
-          <CategorySelect />
+          <CategorySelect
+            handleChange={props.handleChange}
+            selectCategory={props.selectCategory}
+            setSelectedCategory={props.setSelectedCategory}
+          />
         </button>
         <button className="block">Settings</button>
       </div>
