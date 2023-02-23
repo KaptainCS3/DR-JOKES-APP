@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import style from "../styles/container.module.css";
 import JokeContainer from "./JokeContainer";
 import jokes from "../jokes";
-import Jokes from "./Jokes";
 import Modal from "./Modal";
 const JokeSlider = (props) => {
+  const index = props.catValue.indexOf(props.selectCategory);
   const [showModal, setShowModal] = useState(false);
   const toggle = () => {
     setShowModal(true);
@@ -13,8 +13,22 @@ const JokeSlider = (props) => {
   const [width, setWidth] = useState(0);
   const carousel = useRef();
 
-  const jokesData = jokes.map((el) => {
-    return <JokeContainer key={el.id} {...el} toggle={toggle} />;
+  const object = jokes.map((el) => {
+    if (props.selectCategory === el.category.name) {
+      return el.joke.map((item) => {
+        return (
+          <JokeContainer
+            punchline={item.punchline}
+            body={item.body}
+            category={el.category}
+            id={item.id}
+            toggle={toggle}
+          />
+        );
+      });
+    } else {
+      console.log("Not found");
+    }
   });
 
   useEffect(() => {
@@ -35,8 +49,16 @@ const JokeSlider = (props) => {
             className={`flex flex-row justify-between w-full`}
             style={{ paddingLeft: "1%" }}
           >
-            {jokesData}
-            <Modal showModal={showModal} setShowModal={setShowModal} />
+            {object}
+            <Modal
+              showModal={showModal}
+              setShowModal={setShowModal}
+              object={object}
+              index={index}
+              catValue={props.catValue}
+              catIndex={props.catIndex}
+              setCatIndex={props.setCatIndex}
+            />
             {/* flex justify-center items-center w-64 h-64 my-16 rounded-xl shadow-2xl flex-col mr-4 */}
           </motion.div>
         </motion.div>
