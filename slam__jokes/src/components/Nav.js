@@ -9,12 +9,15 @@ import DropDown from "./DropDown";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import CategorySelect from "./CategorySelect";
 const Nav = (props) => {
-  const [isNavBar, setIsNavBar] = useState(false);
+  const showForm = () => {
+    props.handleClick();
+    props.setIsNavBar(false);
+  };
   const showNav = () => {
-    setIsNavBar(true);
+    props.setIsNavBar(true);
   };
   const hideNav = () => {
-    setIsNavBar(false);
+    props.setIsNavBar(false);
   };
   return (
     //Main nav bar
@@ -37,7 +40,7 @@ const Nav = (props) => {
       {/* toggle open nav bar*/}
       <div
         className={
-          isNavBar
+          props.isNavBar
             ? `sm:transition-[width] ease-in-out delay-150 absolute top-0 left-0 w-[70%] min-h-[120%] bg-[#6200EE] text-white dark:bg-[#121212] text-gray-200 md:hidden lg:hidden`
             : "hidden"
         }
@@ -58,9 +61,14 @@ const Nav = (props) => {
                   setSelectedCategory={props.setSelectedCategory}
                 />
               </p>
-              <p className="pt-4">Create Jokes</p>
-              <p className="pt-4">
+              <button className="pt-4" onClick={showForm}>
+                Create Jokes
+              </button>
+              <p className="pt-4 flex cursor-pointer">
                 {/* toggle dark mode */}
+                <span className="pr-2">
+                  {props.isDarkMode ? "Light" : "Dark"}
+                </span>
                 <DarkModeSwitch
                   style={{ marginBottom: "2rem" }}
                   checked={props.isDarkMode}
