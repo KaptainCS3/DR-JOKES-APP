@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Reaction from "./Reaction";
 import JokeContainer from "./JokeContainer";
 import joke from "../jokes";
