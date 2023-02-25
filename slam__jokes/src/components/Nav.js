@@ -5,9 +5,10 @@ import {
   faChevronDown,
   faClose,
 } from "@fortawesome/free-solid-svg-icons";
-import DropDown from "./DropDown";
+// import DropDown from "./DropDown";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import CategorySelect from "./CategorySelect";
+import CreateJoke from "./CreateJoke";
 const Nav = (props) => {
   const showForm = () => {
     props.handleClick();
@@ -22,7 +23,7 @@ const Nav = (props) => {
   return (
     //Main nav bar
     <nav
-      className={`dark:bg-[#121212] bg-[#6200EE] nav w-full flex min-h-0 sm:flex-row h-12 justify-between items-center px-4 md:flex-row h-16 py-10 lg:min-h-[100vh] flex-col justify-start`}
+      className={`dark:bg-[#121212] bg-[#6200EE] nav w-full flex min-h-0 sm:flex-row h-12 justify-between items-center px-4 md:flex-row h-16 py-10 lg:min-h-[118vh] flex-col justify-start`}
     >
       {/* display on small screen and mobile */}
       <div className="hamburger__menu md:hidden lg:hidden">
@@ -84,16 +85,12 @@ const Nav = (props) => {
 
       {/* Nav content for medium screens  md*/}
       <div
-        className={`table__view w-[70%] text-white dark:text-gray-300 font-bold flex justify-between sm:hidden lg:hidden`}
+        className={`table__view w-[75%] text-white dark:text-gray-300 font-bold flex justify-between sm:hidden lg:hidden`}
       >
-        <>
-          <button>
-            <DropDown
-              width="25rem"
-              text="CREATE JOKE"
-              header="CREATE JOKE/RIDDLE"
-            />
-            <FontAwesomeIcon icon={faChevronDown} className="pl-2" />
+        <div className="flex w-full justify-evenly">
+          <button className="flex items-center">
+            Create Joke
+            <CreateJoke />
           </button>
           <button>
             <CategorySelect
@@ -102,12 +99,11 @@ const Nav = (props) => {
               setSelectedCategory={props.setSelectedCategory}
             />
           </button>
-          <button>
-            <DropDown width="25rem" text="SETTINGS" header="SETTINGS" />
-            <FontAwesomeIcon icon={faChevronDown} className="pl-2" />
-          </button>
-        </>
-        <div className="mode">
+          <button>Settings</button>
+        </div>
+        <div className="mode flex items-center">
+          {/* toggle dark mode */}
+          <span className="pr-2">{props.isDarkMode ? "Light" : "Dark"}</span>
           <DarkModeSwitch
             checked={props.isDarkMode}
             onChange={props.toggleDarkMode}
@@ -118,16 +114,36 @@ const Nav = (props) => {
 
       {/* Nav content for large screens lg */}
 
-      <div className="hamburger__menu text-white h-5/6 md:hidden sm:hidden">
-        <button className="block">Create Joke</button>
-        <button className="block">
-          <CategorySelect
-            handleChange={props.handleChange}
-            selectCategory={props.selectCategory}
-            setSelectedCategory={props.setSelectedCategory}
-          />
-        </button>
-        <button className="block">Settings</button>
+      <div className="hamburger__menu text-white h-full flex flex-col justify-between md:hidden sm:hidden">
+        <div>
+          <button className="block">
+            Create Joke
+            <CreateJoke />
+          </button>
+          <button className="block">
+            <CategorySelect
+              handleChange={props.handleChange}
+              selectCategory={props.selectCategory}
+              setSelectedCategory={props.setSelectedCategory}
+            />
+          </button>
+          <button className="block">Settings</button>
+        </div>
+        <div>
+          <div className="text-white">
+            <p>
+              <button>About</button>
+            </p>
+            <p>
+              {" "}
+              <button>Contact Us</button>
+            </p>
+            <p>
+              {" "}
+              <button>Terms and conditions</button>
+            </p>
+          </div>
+        </div>
       </div>
     </nav>
   );
