@@ -2,36 +2,24 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import style from "../styles/container.module.css";
 import JokeContainer from "./JokeContainer";
-import jokes from "../jokes";
 import Modal from "./Modal";
 const JokeSlider = (props) => {
-  const index = props.catValue.indexOf(props.selectCategory);
   const toggle = () => {
     props.setShowModal(true);
   };
   const [width, setWidth] = useState(0);
   const carousel = useRef();
 
-  const object = jokes.map((el) => {
-    if (props.selectCategory === el.category.name) {
-      return el.joke.map((item) => {
-        return (
-          <JokeContainer
-            punchline={item.punchline}
-            body={item.body}
-            category={el.category}
-            id={item.id}
-            toggle={toggle}
-          />
-        );
-      });
-    } else {
-      return false;
-    }
+  const object = props.fetchData.map((el) => {
+    return (
+      <JokeContainer punchline={el.punchline} setup={el.setup} toggle={toggle} />
+    );
   });
 
   useEffect(() => {
-    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+    setTimeout(() => {
+      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+    }, 3000);
   }, []);
   return (
     <div className="sm:hidden">
@@ -53,8 +41,6 @@ const JokeSlider = (props) => {
               showModal={props.showModal}
               setShowModal={props.setShowModal}
               object={object}
-              index={index}
-              catValue={props.catValue}
               catIndex={props.catIndex}
               setCatIndex={props.setCatIndex}
             />
