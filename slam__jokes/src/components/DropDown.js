@@ -8,9 +8,9 @@ const DropDown = (props) => {
   const styles = {
     width: props.width,
   };
-  const category = jokes.map(el=>{
+  // const category = jokes.map(el=>{
 
-  })
+  // })
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
