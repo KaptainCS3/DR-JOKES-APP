@@ -6,9 +6,8 @@ import jokes from "../jokes";
 import Modal from "./Modal";
 const JokeSlider = (props) => {
   const index = props.catValue.indexOf(props.selectCategory);
-  const [showModal, setShowModal] = useState(false);
   const toggle = () => {
-    setShowModal(true);
+    props.setShowModal(true);
   };
   const [width, setWidth] = useState(0);
   const carousel = useRef();
@@ -27,7 +26,7 @@ const JokeSlider = (props) => {
         );
       });
     } else {
-      console.log("Not found");
+      return false;
     }
   });
 
@@ -51,8 +50,8 @@ const JokeSlider = (props) => {
           >
             {object}
             <Modal
-              showModal={showModal}
-              setShowModal={setShowModal}
+              showModal={props.showModal}
+              setShowModal={props.setShowModal}
               object={object}
               index={index}
               catValue={props.catValue}
