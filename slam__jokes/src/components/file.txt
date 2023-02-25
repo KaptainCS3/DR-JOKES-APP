@@ -1,0 +1,123 @@
+
+  const JokeContainer = (props) => {
+  const { name } = props.category;
+  // console.table(name);
+  return (
+    <article
+      onClick={props.toggle}
+      className={`dark:bg-slate-800 sm:px-[2rem] mr-0 text-center py-[1.5rem] shadow-2xl rounded-xl h-64 flex justify-center items-center w-full flex-col md:mr-16 mb-8 w-[20rem] lg:mr-10`}
+    >
+      <h4 className={`mb-[0.25rem] font-bold`}></h4>
+      <p className={`mb-[0.75rem]`}>Thats silly bro don't do that</p>
+    </article>
+  );
+};
+
+
+
+
+
+
+
+[
+    {
+        "id": 1,
+        "punchline": "How do you call a dog with no legs? ",
+        "setup": "You don't call it, cos it can't come!",
+        "category_id": 1,
+        "author_id": 1,
+        "created_at": "2023-02-22T12:15:52.000000Z",
+        "updated_at": "2023-02-22T12:15:52.000000Z",
+        "author": {
+            "id": 1,
+            "name": "Admin Joker",
+            "email": "adminjoker@joker-api.cm",
+            "email_verified_at": null,
+            "created_at": "2023-02-22T12:13:57.000000Z",
+            "updated_at": "2023-02-22T12:13:57.000000Z"
+        },
+        "category": {
+            "id": 1,
+            "name": "Family",
+            "code": "Family",
+            "created_at": "2023-02-22T11:59:23.000000Z",
+            "updated_at": "2023-02-22T11:59:23.000000Z"
+        },
+        "comments": []
+    },
+    {
+        "id": 2,
+        "punchline": "Who played the flute?",
+        "setup": "It was done by the fluter?",
+        "category_id": 1,
+        "author_id": 2,
+        "created_at": "2023-02-24T09:27:01.000000Z",
+        "updated_at": "2023-02-24T09:27:01.000000Z",
+        "author": {
+            "id": 2,
+            "name": "Fongoh Martin",
+            "email": "fongohmartin@gmail.com",
+            "email_verified_at": null,
+            "created_at": "2023-02-24T09:27:01.000000Z",
+            "updated_at": "2023-02-24T09:27:01.000000Z"
+        },
+        "category": {
+            "id": 1,
+            "name": "Family",
+            "code": "Family",
+            "created_at": "2023-02-22T11:59:23.000000Z",
+            "updated_at": "2023-02-22T11:59:23.000000Z"
+        },
+        "comments": []
+    },
+    {
+        "id": 3,
+        "punchline": "thids opsdfj apofjg",
+        "setup": "asfsd inoh'sfgv",
+        "category_id": 1,
+        "author_id": 3,
+        "created_at": "2023-02-24T11:54:39.000000Z",
+        "updated_at": "2023-02-24T11:54:39.000000Z",
+        "author": {
+            "id": 3,
+            "name": "Formasit chijoh Fokunang",
+            "email": "formasitf@gmail.com",
+            "email_verified_at": null,
+            "created_at": "2023-02-24T11:54:39.000000Z",
+            "updated_at": "2023-02-24T11:54:39.000000Z"
+        },
+        "category": {
+            "id": 1,
+            "name": "Family",
+            "code": "Family",
+            "created_at": "2023-02-22T11:59:23.000000Z",
+            "updated_at": "2023-02-22T11:59:23.000000Z"
+        },
+        "comments": []
+    },
+    {
+        "id": 4,
+        "punchline": "Hello",
+        "setup": "hi",
+        "category_id": 1,
+        "author_id": 3,
+        "created_at": "2023-02-24T13:34:51.000000Z",
+        "updated_at": "2023-02-24T13:34:51.000000Z",
+        "author": {
+            "id": 3,
+            "name": "Formasit chijoh Fokunang",
+            "email": "formasitf@gmail.com",
+            "email_verified_at": null,
+            "created_at": "2023-02-24T11:54:39.000000Z",
+            "updated_at": "2023-02-24T11:54:39.000000Z"
+        },
+        "category": {
+            "id": 1,
+            "name": "Family",
+            "code": "Family",
+            "created_at": "2023-02-22T11:59:23.000000Z",
+            "updated_at": "2023-02-22T11:59:23.000000Z"
+        },
+        "comments": []
+    }
+]
