@@ -6,37 +6,34 @@ import ChevronRight from "./ChevronRight";
 import RandomJokeBtn from "./RandomJokeBtn";
 
 const Modal = (props) => {
-
   //! The review is same as a carousel you know in css and normal js
 
   //! This function helps us check and make sure we don't go above the length of our array and below its length
   const checkNumber = (number) => {
-    if (number > props.object[props.index].length - 1) {
+    if (number > props.object.length - 1) {
       return 0;
     }
-    if (number < 0) return props.object[props.index].length - 1;
+    if (number < 0) return props.object.length - 1;
     return number;
   };
 
   //! This function help us in moving to the previous Joke element
   const prevJoke = () => {
     return props.setCatIndex((curr) =>
-      curr === 0 ? props.object[props.index].length - 1 : curr - 1
+      curr === 0 ? props.object.length - 1 : curr - 1
     );
   };
 
   //! This function help us in moving to the next Joke element
   const nextJoke = () => {
     return props.setCatIndex((curr) =>
-      curr === props.object[props.index].length - 1 ? 0 : curr + 1
+      curr === props.object.length - 1 ? 0 : curr + 1
     );
   };
 
   //! return random Joke Index
   const randomJoke = () => {
-    let randomIndex = Math.floor(
-      Math.random() * props.object[props.index].length
-    );
+    let randomIndex = Math.floor(Math.random() * props.object.length);
     if (randomIndex === props.catIndex) {
       randomIndex = props.catIndex + 1;
     }
@@ -61,12 +58,12 @@ const Modal = (props) => {
               <div className="dark:text-slate-400 border-0 rounded-lg shadow-lg relative flex flex-col bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 rounded-t">
-                  <h3 className="text-3xl font-semibold">Modal Title</h3>
+                  {/* <h3 className="text-3xl font-semibold">Modal Title</h3> */}
                 </div>
                 {/*body*/}
                 <div className="w-full overflow-hidden">
                   <div className="flex transition-transform ease-out duration-500 dark:text-[#000]">
-                    {props.object[props.index][props.catIndex]}
+                    {props.object[props.catIndex]}
                   </div>
                 </div>
               </div>
