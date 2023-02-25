@@ -1,57 +1,50 @@
 import React from "react";
 import Reaction from "./Reaction";
 import JokeContainer from "./JokeContainer";
-import joke from "../jokes";
+// import joke from "../jokes";
 import ChevronLeft from "./ChevronLeft";
 import RandomJokeBtn from "./RandomJokeBtn";
 import ChevronRight from "./ChevronRight";
 import CommentForm from "./CommentForm";
 const Jokes = (props) => {
-  const index = props.catValue.indexOf(props.selectCategory);
-  const object = joke.map((el) => {
-    if (props.selectCategory === el.category.name) {
-      return el.joke.map((item) => {
-        return (
-          <JokeContainer
-            punchline={item.punchline}
-            body={item.body}
-            category={el.category}
-            id={item.id}
-          />
-        );
-      });
-    } else {
-      return false;
-    }
+  const object = props.fetchData.map((el) => {
+    return (
+      <JokeContainer
+        punchline={el.punchline}
+        setup={el.setup}
+        // category={el.category}
+      />
+    );
   });
+  
   //! The review is same as a carousel you know in css and normal js
 
   //! This function helps us check and make sure we don't go above the length of our array and below its length
   const checkNumber = (number) => {
-    if (number > object[index].length - 1) {
+    if (number > object.length - 1) {
       return 0;
     }
-    if (number < 0) return object[index].length - 1;
+    if (number < 0) return object.length - 1;
     return number;
   };
 
   //! This function help us in moving to the previous Joke element
   const prevJoke = () => {
     return props.setCatIndex((curr) =>
-      curr === 0 ? object[index].length - 1 : curr - 1
+      curr === 0 ? object.length - 1 : curr - 1
     );
   };
 
   //! This function help us in moving to the next Joke element
   const nextJoke = () => {
     return props.setCatIndex((curr) =>
-      curr === object[index].length - 1 ? 0 : curr + 1
+      curr === object.length - 1 ? 0 : curr + 1
     );
   };
 
   //! return random Joke Index
   const randomJoke = () => {
-    let randomIndex = Math.floor(Math.random() * object[index].length);
+    let randomIndex = Math.floor(Math.random() * object.length);
     if (randomIndex === props.catIndex) {
       randomIndex = props.catIndex + 1;
     }
@@ -62,9 +55,10 @@ const Jokes = (props) => {
     <div
       className={`flex justify-between items-center my-8 mx-auto flex-col px-8 md:hidden lg:hidden`}
     >
-      <div className="w-full overflow-hidden">
+      {/* //! position overflow on rendering filter category */}
+      <div className="w-full">
         <div className="flex transition-transform ease-out duration-500">
-          {object[index][props.catIndex]}
+          {object[props.catIndex]}
         </div>
       </div>
       <div className={`flex justify-between w-full mx-auto mt-4`}>
