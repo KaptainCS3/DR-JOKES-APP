@@ -121,3 +121,22 @@
         "comments": []
     }
 ]
+
+
+
+
+{
+    "punchline": "What is z index",
+    "setup": "it is a property that your div has like 9999 but the div doesn't display 😂😂😂",
+    "author":{
+        "name": "KaptainCS3",
+        "email": "stayuptoday237@gmail.com"
+    },
+    "category_id": 3,
+    "category":{
+        "id": 3,
+        "name": "Tech",
+        "code": "Tech"
+    },
+        "comments": []
+}
