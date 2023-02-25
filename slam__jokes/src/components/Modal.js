@@ -6,14 +6,7 @@ import ChevronRight from "./ChevronRight";
 import RandomJokeBtn from "./RandomJokeBtn";
 
 const Modal = (props) => {
-  console.log(props.showModal);
-  // if(!props.showModal && props.object[props.index][props.catIndex]){
-    console.log(props.object[props.index][props.catIndex])
-  // }
-  //   else{
-  //     "I don't know who just clicked me";
-  //   }
-  // console.log(props.object[props.index]);
+
   //! The review is same as a carousel you know in css and normal js
 
   //! This function helps us check and make sure we don't go above the length of our array and below its length
