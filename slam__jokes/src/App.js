@@ -56,7 +56,18 @@ const App = () => {
 
   //!response state data
   const [fetchData, setFetchData] = useState([]);
-  //!Submit new joke
+
+  //!like and dislike joke state
+  const [like, setLike] = useState(false);
+  const [disLike, setDisLike] = useState(false);
+  const thumbsUp = () => {
+    setLike(!like);
+    setDisLike(false);
+  };
+  const thumbsDown = () => {
+    setDisLike(!disLike);
+    setLike(false);
+  };
   // const [postJoke, setPostJoke] = useState([]);
   //! Dark mode handler
   const toggleDarkMode = (checked) => {
@@ -80,17 +91,6 @@ const App = () => {
   };
 
   //! prevent page reload
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   setCreateJokeData({
-  //     punchline: "",
-  //     setup: "",
-  //     author_name: "",
-  //     author_email: "",
-  //     category_id: createJokeCategory,
-  //   });
-  // };
-
   const handleCreateDataChange = (e) => {
     setCreateJokeCategory(e.target.value);
   };
@@ -146,7 +146,6 @@ const App = () => {
       });
     }
   };
-  console.log(createJokeData);
 
   return (
     <div className="w-full lg:flex min-h-[100vh]">
@@ -193,11 +192,14 @@ const App = () => {
               catIndex={catIndex}
               setCatIndex={setCatIndex}
               fetchData={fetchData}
+              like={like}
+              disLike={disLike}
+              thumbsDown={thumbsDown}
+              thumbsUp={thumbsUp}
             />
             <CreateJoke
               createJokeCategory={createJokeCategory}
               createJokeData={createJokeData}
-              // handleSubmit={handleSubmit}
               createJokeHandleChange={createJokeHandleChange}
               handleCreateDataChange={handleCreateDataChange}
               displayCreateJoke={displayCreateJoke}
@@ -215,6 +217,10 @@ const App = () => {
                 showModal={showModal}
                 setShowModal={setShowModal}
                 fetchData={fetchData}
+                like={like}
+                disLike={disLike}
+                thumbsDown={thumbsDown}
+                thumbsUp={thumbsUp}
               />
               <JokeSlider
                 selectCategory={selectCategory}
@@ -224,10 +230,14 @@ const App = () => {
                 showModal={showModal}
                 setShowModal={setShowModal}
                 fetchData={fetchData}
+                like={like}
+                disLike={disLike}
+                thumbsDown={thumbsDown}
+                thumbsUp={thumbsUp}
               />
             </div>
             <div className="w-full flex justify-end pr-4 pt-2 sm:hidden md:hidden">
-              <div className=" bg-[#000] dark:text-dark border-2 bg-white w-16 h-16 rounded-full text-white flex justify-center items-center text-4xl">
+              <div className="bg-black w-16 h-16 rounded-full text-white flex justify-center items-center text-4xl dark:text-white border-2">
                 <FontAwesomeIcon icon={faQuestion} />
               </div>
             </div>
