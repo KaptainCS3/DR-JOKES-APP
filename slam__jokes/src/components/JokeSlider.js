@@ -43,6 +43,10 @@ const JokeSlider = (props) => {
               object={object}
               catIndex={props.catIndex}
               setCatIndex={props.setCatIndex}
+              like={props.like}
+              disLike={props.disLike}
+              thumbsDown={props.thumbsDown}
+              thumbsUp={props.thumbsUp}
             />
             {/* flex justify-center items-center w-64 h-64 my-16 rounded-xl shadow-2xl flex-col mr-4 */}
           </motion.div>
