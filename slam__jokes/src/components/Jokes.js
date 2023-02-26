@@ -1,7 +1,6 @@
 import React from "react";
 import Reaction from "./Reaction";
 import JokeContainer from "./JokeContainer";
-// import joke from "../jokes";
 import ChevronLeft from "./ChevronLeft";
 import RandomJokeBtn from "./RandomJokeBtn";
 import ChevronRight from "./ChevronRight";
@@ -12,7 +11,6 @@ const Jokes = (props) => {
       <JokeContainer
         punchline={el.punchline}
         setup={el.setup}
-        // category={el.category}
       />
     );
   });
@@ -66,7 +64,12 @@ const Jokes = (props) => {
         <RandomJokeBtn randomJoke={randomJoke} />
         <ChevronRight nextJoke={nextJoke} />
       </div>
-      <Reaction />
+      <Reaction
+        like={props.like}
+        disLike={props.disLike}
+        thumbsDown={props.thumbsDown}
+        thumbsUp={props.thumbsUp}
+      />
       <CommentForm />
     </div>
   );
