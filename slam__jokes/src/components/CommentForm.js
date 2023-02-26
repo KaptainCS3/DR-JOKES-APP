@@ -42,9 +42,9 @@ const CommentForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full h-[3rem] flex justify-between items-center px-2 rounded shadow bg-white"
+      className="w-full h-[3rem] flex justify-between items-center px-2 rounded shadow bg-white mt-5"
     >
-      <div className="py-[2.5rem w-[80%]">
+      <div className="py-[2.5rem] w-[80%]">
         <input
           type="text"
           placeholder="Leave a comment...."
