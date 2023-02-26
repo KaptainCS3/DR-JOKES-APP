@@ -371,7 +371,7 @@ const jokesTemplate = [
   {
     id: 4,
     category: {
-      name: "RelationshipJokes",
+      name: "Relationship Jokes",
       img: "",
     },
     joke: [

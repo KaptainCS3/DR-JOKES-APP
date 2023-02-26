@@ -9,22 +9,22 @@ const CategorySelect = (props) => {
         value={props.selectCategory}
       >
         <option className="text-[#000]">Select Category.......</option>
-        <option className="text-[#000]" value="African Jokes" selected>
+        <option className="text-[#000]" value={1} selected>
           African Jokes
         </option>
-        <option className="text-[#000]" value="Western World Jokes">
+        <option className="text-[#000]" value={2}>
           Western World Jokes
         </option>
-        <option className="text-[#000]" value="Family Jokes">
+        <option className="text-[#000]" value={3}>
           Family Jokes
         </option>
-        <option className="text-[#000]" value="Relationship Jokes">
+        <option className="text-[#000]" value={4}>
           Relationship Jokes
         </option>
-        <option className="text-[#000]" value="Education Jokes">
+        <option className="text-[#000]" value={5}>
           Education Jokes
         </option>
-        <option className="text-[#000]" value="Tech Jokes">
+        <option className="text-[#000]" value={6}>
           Tech Jokes
         </option>
       </select>

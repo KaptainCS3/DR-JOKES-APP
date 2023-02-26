@@ -2,23 +2,24 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import style from "../styles/container.module.css";
 import JokeContainer from "./JokeContainer";
-import jokes from "../jokes";
-import Jokes from "./Jokes";
 import Modal from "./Modal";
 const JokeSlider = (props) => {
-  const [showModal, setShowModal] = useState(false);
   const toggle = () => {
-    setShowModal(true);
+    props.setShowModal(true);
   };
   const [width, setWidth] = useState(0);
   const carousel = useRef();
 
-  const jokesData = jokes.map((el) => {
-    return <JokeContainer key={el.id} {...el} toggle={toggle} />;
+  const object = props.fetchData.map((el) => {
+    return (
+      <JokeContainer punchline={el.punchline} setup={el.setup} toggle={toggle} />
+    );
   });
 
   useEffect(() => {
-    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+    setTimeout(() => {
+      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+    }, 3000);
   }, []);
   return (
     <div className="sm:hidden">
@@ -35,8 +36,18 @@ const JokeSlider = (props) => {
             className={`flex flex-row justify-between w-full`}
             style={{ paddingLeft: "1%" }}
           >
-            {jokesData}
-            <Modal showModal={showModal} setShowModal={setShowModal} />
+            {object}
+            <Modal
+              showModal={props.showModal}
+              setShowModal={props.setShowModal}
+              object={object}
+              catIndex={props.catIndex}
+              setCatIndex={props.setCatIndex}
+              like={props.like}
+              disLike={props.disLike}
+              thumbsDown={props.thumbsDown}
+              thumbsUp={props.thumbsUp}
+            />
             {/* flex justify-center items-center w-64 h-64 my-16 rounded-xl shadow-2xl flex-col mr-4 */}
           </motion.div>
         </motion.div>

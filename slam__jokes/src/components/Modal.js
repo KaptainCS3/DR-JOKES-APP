@@ -1,10 +1,45 @@
 import React from "react";
-import Comment from "./Comment";
+import CommentForm from "./CommentForm";
 import Reaction from "./Reaction";
 import ChevronLeft from "./ChevronLeft";
 import ChevronRight from "./ChevronRight";
+import RandomJokeBtn from "./RandomJokeBtn";
 
 const Modal = (props) => {
+  //! The review is same as a carousel you know in css and normal js
+
+  //! This function helps us check and make sure we don't go above the length of our array and below its length
+  const checkNumber = (number) => {
+    if (number > props.object.length - 1) {
+      return 0;
+    }
+    if (number < 0) return props.object.length - 1;
+    return number;
+  };
+
+  //! This function help us in moving to the previous Joke element
+  const prevJoke = () => {
+    return props.setCatIndex((curr) =>
+      curr === 0 ? props.object.length - 1 : curr - 1
+    );
+  };
+
+  //! This function help us in moving to the next Joke element
+  const nextJoke = () => {
+    return props.setCatIndex((curr) =>
+      curr === props.object.length - 1 ? 0 : curr + 1
+    );
+  };
+
+  //! return random Joke Index
+  const randomJoke = () => {
+    let randomIndex = Math.floor(Math.random() * props.object.length);
+    if (randomIndex === props.catIndex) {
+      randomIndex = props.catIndex + 1;
+    }
+    props.setCatIndex(checkNumber(randomIndex));
+  };
+
   return (
     <>
       {props.showModal ? (
@@ -15,7 +50,7 @@ const Modal = (props) => {
                 className="mb-8 text-black text-3xl leading-none font-bold outline-none focus:outline-none flex justify-center items-center w-full"
                 onClick={() => props.setShowModal(false)}
               >
-                <span className="dark:text-white bg-transparent text-black opacity-1 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                <span className="dark:text-white bg-transparent text-black opacity-1 h-6 w-6 text-2xl z-40 block outline-none focus:outline-none">
                   ×
                 </span>
               </button>
@@ -23,25 +58,28 @@ const Modal = (props) => {
               <div className="dark:text-slate-400 border-0 rounded-lg shadow-lg relative flex flex-col bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 rounded-t">
-                  <h3 className="text-3xl font-semibold">Modal Title</h3>
+                  {/* <h3 className="text-3xl font-semibold">Modal Title</h3> */}
                 </div>
                 {/*body*/}
-                <div className="relative p-6 flex-auto">
-                  <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    I always felt like I could do anything. That’s the main
-                    thing people are controlled by! Thoughts- their perception
-                    of themselves! They're slowed down by their perception of
-                    themselves. If you're taught you can’t do anything, you
-                    won’t do anything. I was taught I could do everything.
-                  </p>
+                <div className="w-full overflow-hidden">
+                  <div className="flex transition-transform ease-out duration-500 dark:text-[#000]">
+                    {props.object[props.catIndex]}
+                  </div>
                 </div>
-                {/*footer*/}
               </div>
-              <div className="flex items-center justify-end flex-col rounded-b">
-                <ChevronLeft />
-                <ChevronRight />
-                <Reaction />
-                <Comment />
+              <div className="absolute flex justify-between inset-0 items-center p-4">
+                <ChevronLeft prevJoke={prevJoke} />
+                <ChevronRight nextJoke={nextJoke} />
+              </div>
+              <div className="flex items-center justify-end flex-col rounded-b mt-4 relative">
+                <RandomJokeBtn randomJoke={randomJoke} />
+                <Reaction
+                  like={props.like}
+                  disLike={props.disLike}
+                  thumbsDown={props.thumbsDown}
+                  thumbsUp={props.thumbsUp}
+                />
+                <CommentForm />
               </div>
             </div>
           </div>
@@ -53,22 +91,3 @@ const Modal = (props) => {
 };
 
 export default Modal;
-
-{
-  /* <button
-                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={() => props.setShowModal(false)}
-                    >
-                      Close
-                    </button> */
-}
-{
-  /* <button
-                      className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={() => props.setShowModal(false)}
-                    >
-                      Save Changes
-                    </button> */
-}

@@ -1,82 +1,76 @@
-import React, { useState } from "react";
+import React from "react";
 import Reaction from "./Reaction";
-import Comment from "./Comment";
 import JokeContainer from "./JokeContainer";
-import joke from "../jokes";
 import ChevronLeft from "./ChevronLeft";
 import RandomJokeBtn from "./RandomJokeBtn";
 import ChevronRight from "./ChevronRight";
-import jokesTemplate from "../jokes";
+import CommentForm from "./CommentForm";
 const Jokes = (props) => {
-  const object = joke.map((el) => {
-    if (props.selectCategory === el.category.name) {
-      console.log(el.category.name);
-      return el.joke.map((item) => {
-        return (
-          <JokeContainer
-            punchline={item.punchline}
-            body={item.body}
-            category={el.category}
-          />
-        );
-      });
-    } else {
-      console.log("Not found");
-    }
+  const object = props.fetchData.map((el) => {
+    return (
+      <JokeContainer
+        punchline={el.punchline}
+        setup={el.setup}
+      />
+    );
   });
-  // The review is same as a carousel you know in css and normal js
-  const [index, setIndex] = useState(0);
-  // const [boxIndex, setBoxIndex] = useState(0);
-  const { id} = joke[index];
+  
+  //! The review is same as a carousel you know in css and normal js
 
-  // This function helps us check and make sure we don't go above the length of our array and below its length
+  //! This function helps us check and make sure we don't go above the length of our array and below its length
   const checkNumber = (number) => {
-    if (number > joke.length - 1) {
+    if (number > object.length - 1) {
       return 0;
     }
-    if (number < 0) return joke.length - 1;
+    if (number < 0) return object.length - 1;
     return number;
   };
-  console.log(id);
-  // console.log(joke);
-  // console.log(category);
 
-  // This function help us in moving to the previous element
+  //! This function help us in moving to the previous Joke element
   const prevJoke = () => {
-    setIndex((index) => {
-      let newIndex = index - 1;
-      return checkNumber(newIndex);
-    });
+    return props.setCatIndex((curr) =>
+      curr === 0 ? object.length - 1 : curr - 1
+    );
   };
 
-  // This function help us in moving to the next element
+  //! This function help us in moving to the next Joke element
   const nextJoke = () => {
-    setIndex((index) => {
-      let newIndex = index + 1;
-      return checkNumber(newIndex);
-    });
+    return props.setCatIndex((curr) =>
+      curr === object.length - 1 ? 0 : curr + 1
+    );
   };
-  // in this function , we use the random object to generate random numbers so we can get random images within our range
+
+  //! return random Joke Index
   const randomJoke = () => {
-    let randomIndex = Math.floor(Math.random() * joke.length);
-    if (randomIndex === index) {
-      randomIndex = index + 1;
+    let randomIndex = Math.floor(Math.random() * object.length);
+    if (randomIndex === props.catIndex) {
+      randomIndex = props.catIndex + 1;
     }
-    // return randomIndex
-    setIndex(checkNumber(randomIndex));
+    props.setCatIndex(checkNumber(randomIndex));
   };
+
   return (
     <div
       className={`flex justify-between items-center my-8 mx-auto flex-col px-8 md:hidden lg:hidden`}
     >
-      <>{object}</>
+      {/* //! position overflow on rendering filter category */}
+      <div className="w-full">
+        <div className="flex transition-transform ease-out duration-500">
+          {object[props.catIndex]}
+        </div>
+      </div>
       <div className={`flex justify-between w-full mx-auto mt-4`}>
         <ChevronLeft prevJoke={prevJoke} />
         <RandomJokeBtn randomJoke={randomJoke} />
         <ChevronRight nextJoke={nextJoke} />
       </div>
-      <Reaction />
-      <Comment />
+      <Reaction
+        like={props.like}
+        disLike={props.disLike}
+        thumbsDown={props.thumbsDown}
+        thumbsUp={props.thumbsUp}
+      />
+      <CommentForm />
     </div>
   );
 };
