@@ -73,7 +73,12 @@ const Modal = (props) => {
               </div>
               <div className="flex items-center justify-end flex-col rounded-b mt-4 relative">
                 <RandomJokeBtn randomJoke={randomJoke} />
-                <Reaction />
+                <Reaction
+                  like={props.like}
+                  disLike={props.disLike}
+                  thumbsDown={props.thumbsDown}
+                  thumbsUp={props.thumbsUp}
+                />
                 <CommentForm />
               </div>
             </div>
