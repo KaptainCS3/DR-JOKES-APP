@@ -78,6 +78,8 @@ const Modal = (props) => {
                   disLike={props.disLike}
                   thumbsDown={props.thumbsDown}
                   thumbsUp={props.thumbsUp}
+                  showCommentList={props.showCommentList}
+                  numComments={props.numComments}
                 />
                 <CommentForm />
               </div>
