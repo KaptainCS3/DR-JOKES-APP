@@ -1,44 +1,14 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
 const Comment = (props) => {
-  console.log(props);
   return (
-    // <div>
-    <section className="mt-4 mb-12 mr-2">
-      <div className="flex rounded-[.75em] bg-[#fff] h-[auto] min-h-[2.8em] shadow-none">
-        <div className="flex flex-row justify-between w-full items-center px-8">
-          {/* //! ternary operator condition check */}
-          <div
-            style={{
-              textDecoration: mark ? "line-through" : "",
-              color: mark ? "gray" : "",
-            }}
-          >
-            {/* {props.task} */}
-          </div>
-          {/* <section className="flex w-[15%] justify-between">
-              <div>
-                <FontAwesomeIcon
-                  icon={faCheck}
-                  className="cursor-pointer text-green-600"
-                  onClick={handleMark}
-                />
-              </div>
-              <div>
-                <FontAwesomeIcon
-                //   icon={faXmark}
-                  className="cursor-pointer text-red-600"
-                //   onClick={handleRemove}
-                />
-              </div>
-            </section> */}
-        </div>
-      </div>
-    </section>
-    // </div>
+    <article
+      className={`cursor-pointer dark:bg-slate-400 sm:w-full  px-[2rem] mr-0 my-4 py-[0.5rem] shadow rounded-xl flex flex-col`}
+    >
+      <h4 className={`mb-[0.25rem] font-bold`}>@{props.useName}</h4>
+      <p className={`mb-[0.75rem]`}>{props.jokeComment}</p>
+    </article>
   );
 };
 
 export default Comment;
+// {/* //! ternary operator condition check */}
