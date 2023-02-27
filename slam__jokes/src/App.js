@@ -258,6 +258,10 @@ const App = () => {
                 disLike={disLike}
                 thumbsDown={thumbsDown}
                 thumbsUp={thumbsUp}
+                jokeComment={jokeComment}
+                showComment={showComment}
+                setShowComment={setShowComment}
+                numComments={numComments}
               />
               <JokeSlider
                 selectCategory={selectCategory}
@@ -271,6 +275,10 @@ const App = () => {
                 disLike={disLike}
                 thumbsDown={thumbsDown}
                 thumbsUp={thumbsUp}
+                jokeComment={jokeComment}
+                showComment={showComment}
+                setShowComment={setShowComment}
+                numComments={numComments}
               />
             </div>
             <div className="w-full flex justify-end pr-4 pt-2 sm:hidden md:hidden">
