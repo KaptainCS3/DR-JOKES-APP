@@ -5,16 +5,15 @@ import ChevronLeft from "./ChevronLeft";
 import RandomJokeBtn from "./RandomJokeBtn";
 import ChevronRight from "./ChevronRight";
 import CommentForm from "./CommentForm";
+import CommentList from "./CommentList";
 const Jokes = (props) => {
+  const showCommentList = () => {
+    props.setShowComment(!props.showComment);
+  };
   const object = props.fetchData.map((el) => {
-    return (
-      <JokeContainer
-        punchline={el.punchline}
-        setup={el.setup}
-      />
-    );
+    return <JokeContainer punchline={el.punchline} setup={el.setup} />;
   });
-  
+
   //! The review is same as a carousel you know in css and normal js
 
   //! This function helps us check and make sure we don't go above the length of our array and below its length
@@ -69,7 +68,10 @@ const Jokes = (props) => {
         disLike={props.disLike}
         thumbsDown={props.thumbsDown}
         thumbsUp={props.thumbsUp}
+        showCommentList={showCommentList}
+        numComments={props.numComments}
       />
+      <CommentList comments={props.jokeComment} />
       <CommentForm />
     </div>
   );
