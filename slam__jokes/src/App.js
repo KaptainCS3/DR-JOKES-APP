@@ -11,6 +11,7 @@ import JokeSlider from "./components/JokeSlider";
 import catValue from "./categoryValue";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
+import Comment from "./components/Comment";
 const App = () => {
   //!Show modal state
   const [showModal, setShowModal] = useState(false);
@@ -57,6 +58,7 @@ const App = () => {
   //!response state data
   const [fetchData, setFetchData] = useState([]);
 
+  // console.log(fetchData);
   //!like and dislike joke state
   const [like, setLike] = useState(false);
   const [disLike, setDisLike] = useState(false);
@@ -98,11 +100,12 @@ const App = () => {
   //!useEffect prevent component re-Render
   useEffect(() => {
     fetchJokes();
-    // post
+    // lengthCmt();
   }, []);
 
   //!API link
   const API = `https://api.jokes.digitalrenter.com/api/jokes`;
+  const APIComment = `https://api.jokes.digitalrenter.com/api/comments?joke_id={0}`;
   //! fetch data from API
   const fetchJokes = async () => {
     const response = await fetch(API);
@@ -114,6 +117,7 @@ const App = () => {
     }
   };
 
+  const [showComment, setShowComment] = useState(false);
   //! post date to API
   const submitJokeData = async (event) => {
     event.preventDefault();
@@ -146,7 +150,36 @@ const App = () => {
       });
     }
   };
+  // const [cmtCount, setCmtCount] = useState(0);
+  const jokeComment = fetchData.map((el) => {
+    if (el.comments.length !== 0) {
+      return el.comments.map((cmt) => {
+        if (catIndex === el.id - 1)
+          return (
+            <Comment
+              key={el.id}
+              jokeComment={cmt.comment}
+              useName={cmt.commenter.name}
+            />
+          );
+      });
+    }
+  });
 
+  //!alternative using local storage
+  // const comments = fetchData;
+  // localStorage.setItem("comments", JSON.stringify(comments));
+  // var storedNames = JSON.parse(localStorage.getItem("comments"));
+  let numComments = [];
+  const jokeCommentNum = fetchData.map((el) => {
+    if (el.comments.length !== 0) {
+      if (catIndex === el.id - 1) {
+        return (numComments = el.comments.length);
+      } else {
+        return console.log("No comments found");
+      }
+    }
+  });
   return (
     <div className="w-full lg:flex min-h-[100vh]">
       {fetchData.length === 0 ? (
@@ -196,6 +229,10 @@ const App = () => {
               disLike={disLike}
               thumbsDown={thumbsDown}
               thumbsUp={thumbsUp}
+              jokeComment={jokeComment}
+              showComment={showComment}
+              setShowComment={setShowComment}
+              numComments={numComments}
             />
             <CreateJoke
               createJokeCategory={createJokeCategory}
@@ -250,3 +287,8 @@ const App = () => {
 };
 
 export default App;
+
+//  const cmt = storedNames.map((el) => {
+//    if (el.comments.length !== 0)
+//      if (catIndex === el.id) return el.comments.length;
+//  });
