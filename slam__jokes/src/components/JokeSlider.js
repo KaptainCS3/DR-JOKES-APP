@@ -4,6 +4,9 @@ import style from "../styles/container.module.css";
 import JokeContainer from "./JokeContainer";
 import Modal from "./Modal";
 const JokeSlider = (props) => {
+  const showCommentList = () => {
+    props.setShowComment(!props.showComment);
+  };
   const toggle = () => {
     props.setShowModal(true);
   };
@@ -12,7 +15,11 @@ const JokeSlider = (props) => {
 
   const object = props.fetchData.map((el) => {
     return (
-      <JokeContainer punchline={el.punchline} setup={el.setup} toggle={toggle} />
+      <JokeContainer
+        punchline={el.punchline}
+        setup={el.setup}
+        toggle={toggle}
+      />
     );
   });
 
@@ -47,6 +54,8 @@ const JokeSlider = (props) => {
               disLike={props.disLike}
               thumbsDown={props.thumbsDown}
               thumbsUp={props.thumbsUp}
+              showCommentList={showCommentList}
+              numComments={props.numComments}
             />
             {/* flex justify-center items-center w-64 h-64 my-16 rounded-xl shadow-2xl flex-col mr-4 */}
           </motion.div>
