@@ -42,7 +42,7 @@ const Nav = (props) => {
       <div
         className={
           props.isNavBar
-            ? `sm:transition-[width] ease-in-out delay-150 absolute top-0 left-0 w-[70%] min-h-[120%] bg-[#6200EE] text-white dark:bg-[#121212] text-gray-200 md:hidden lg:hidden`
+            ? `sm:transition-[width] ease-in-out delay-150 absolute z-[100] top-0 left-0 w-[70%] min-h-[120%] bg-[#6200EE] text-white dark:bg-[#121212] text-gray-200 md:hidden lg:hidden`
             : "hidden"
         }
       >
