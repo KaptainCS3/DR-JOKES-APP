@@ -11,7 +11,17 @@ import JokeSlider from "./components/JokeSlider";
 import catValue from "./categoryValue";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
+import Comment from "./components/Comment";
 const App = () => {
+  //!Add comment state
+  const [comment, setComment] = useState({
+    comment: "",
+  });
+
+  const [showComment, setShowComment] = useState(true);
+  const toggleComment = () => {
+    setShowComment(!showComment);
+  };
   //!Show modal state
   const [showModal, setShowModal] = useState(false);
 
@@ -57,6 +67,7 @@ const App = () => {
   //!response state data
   const [fetchData, setFetchData] = useState([]);
 
+  // console.log(fetchData);
   //!like and dislike joke state
   const [like, setLike] = useState(false);
   const [disLike, setDisLike] = useState(false);
@@ -98,11 +109,11 @@ const App = () => {
   //!useEffect prevent component re-Render
   useEffect(() => {
     fetchJokes();
-    // post
   }, []);
 
   //!API link
   const API = `https://api.jokes.digitalrenter.com/api/jokes`;
+  const APIComment = `https://api.jokes.digitalrenter.com/api/comments`;
   //! fetch data from API
   const fetchJokes = async () => {
     const response = await fetch(API);
@@ -113,7 +124,6 @@ const App = () => {
       setFetchData(data);
     }
   };
-
   //! post date to API
   const submitJokeData = async (event) => {
     event.preventDefault();
@@ -147,6 +157,77 @@ const App = () => {
     }
   };
 
+  const handleChangeComment = (event) => {
+    const { name, value } = event.target;
+    setComment((prevComment) => {
+      return {
+        ...prevComment,
+        [name]: value,
+      };
+    });
+  };
+
+  const submitJokeComment = async (event) => {
+    event.preventDefault();
+    const response = await fetch(APIComment, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        joke_id: Math.floor(Math.random() * 35) + 1,
+        comment: comment.comment,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(response.error);
+    } else {
+      const data = await response.json();
+      console.log(data, response);
+      alert("Comment successfully Added 😎😄😅😎");
+      setComment({
+        comment: "",
+      });
+    }
+  };
+  //!alternative using local storage
+  // const comments = fetchData;
+  // localStorage.setItem("comments", JSON.stringify(comments));
+  // var storedNames = JSON.parse(localStorage.getItem("comments"));
+  let numComments;
+  console.log(numComments);
+  const jokeCommentNum = fetchData.map((el) => {
+    if (el.comments.length !== 0) {
+      if (catIndex === el.id - 1) {
+        if (numComments === "undefined") return (numComments = 0);
+        else numComments = el.comments.length;
+      } else {
+        return console.log("No comments found");
+      }
+    }
+  });
+  const jokeComment = fetchData.map((el) => {
+    if (el.comments.length !== 0) {
+      return el.comments.map((cmt) => {
+        if (catIndex === el.id - 1) {
+          return (
+            <article
+              className={`cursor-pointer dark:bg-slate-400 sm:w-full  px-[2rem] mr-0 my-4 py-[0.5rem] shadow rounded-xl flex flex-col`}
+            >
+              <h4 className={`mb-[0.25rem] font-bold`}>
+                @{cmt.commenter.name}
+              </h4>
+              <p className={`mb-[0.75rem]`}>{cmt.comment}</p>
+            </article>
+          );
+        } else {
+          return null;
+        }
+      });
+    }
+  });
+  console.log(fetchData);
   return (
     <div className="w-full lg:flex min-h-[100vh]">
       {fetchData.length === 0 ? (
@@ -186,6 +267,8 @@ const App = () => {
                 />
               </div>
             </div>
+
+            {/* //! Main Mobile component */}
             <Jokes
               selectCategory={selectCategory}
               // catValue={catValue}
@@ -196,6 +279,14 @@ const App = () => {
               disLike={disLike}
               thumbsDown={thumbsDown}
               thumbsUp={thumbsUp}
+              jokeComment={jokeComment}
+              showComment={showComment}
+              setShowComment={setShowComment}
+              numComments={numComments}
+              comment={comment}
+              handleChangeComment={handleChangeComment}
+              submitJokeComment={submitJokeComment}
+              toggleComment={toggleComment}
             />
             <CreateJoke
               createJokeCategory={createJokeCategory}
@@ -208,6 +299,7 @@ const App = () => {
               submitJokeData={submitJokeData}
               closeCreateJoke={closeCreateJoke}
             />
+            {/* //!Joke component from Tablet and Desktop */}
             <div>
               <JokeSlider
                 selectCategory={selectCategory}
@@ -221,6 +313,12 @@ const App = () => {
                 disLike={disLike}
                 thumbsDown={thumbsDown}
                 thumbsUp={thumbsUp}
+                jokeComment={jokeComment}
+                showComment={showComment}
+                numComments={numComments}
+                comment={comment}
+                handleChangeComment={handleChangeComment}
+                submitJokeComment={submitJokeComment}
               />
               <JokeSlider
                 selectCategory={selectCategory}
@@ -234,14 +332,23 @@ const App = () => {
                 disLike={disLike}
                 thumbsDown={thumbsDown}
                 thumbsUp={thumbsUp}
+                jokeComment={jokeComment}
+                showComment={showComment}
+                setShowComment={setShowComment}
+                numComments={numComments}
+                comment={comment}
+                handleChangeComment={handleChangeComment}
+                submitJokeComment={submitJokeComment}
               />
             </div>
+            {/* //!Desktop help component */}
             <div className="w-full flex justify-end pr-4 pt-2 sm:hidden md:hidden">
               <div className="bg-black w-16 h-16 rounded-full text-white flex justify-center items-center text-4xl dark:text-white border-2">
                 <FontAwesomeIcon icon={faQuestion} />
               </div>
             </div>
           </main>
+          {/*//! footer Desktop and Tablet  */}
           <Footer />
         </>
       )}
@@ -250,3 +357,8 @@ const App = () => {
 };
 
 export default App;
+
+//  const cmt = storedNames.map((el) => {
+//    if (el.comments.length !== 0)
+//      if (catIndex === el.id) return el.comments.length;
+//  });
