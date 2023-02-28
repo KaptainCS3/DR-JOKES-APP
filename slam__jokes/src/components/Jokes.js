@@ -7,9 +7,6 @@ import ChevronRight from "./ChevronRight";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 const Jokes = (props) => {
-  const showCommentList = () => {
-    props.setShowComment(!props.showComment);
-  };
   const object = props.fetchData.map((el) => {
     return <JokeContainer punchline={el.punchline} setup={el.setup} />;
   });
@@ -68,10 +65,9 @@ const Jokes = (props) => {
         disLike={props.disLike}
         thumbsDown={props.thumbsDown}
         thumbsUp={props.thumbsUp}
-        showCommentList={showCommentList}
         numComments={props.numComments}
       />
-      <CommentList comments={props.jokeComment} />
+      {props.jokeComment ? <CommentList comments={props.jokeComment} /> : ""}
       <CommentForm />
     </div>
   );
