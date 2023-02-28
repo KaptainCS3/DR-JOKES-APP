@@ -4,6 +4,7 @@ import Reaction from "./Reaction";
 import ChevronLeft from "./ChevronLeft";
 import ChevronRight from "./ChevronRight";
 import RandomJokeBtn from "./RandomJokeBtn";
+import CommentList from "./CommentList";
 
 const Modal = (props) => {
   //! The review is same as a carousel you know in css and normal js
@@ -81,7 +82,16 @@ const Modal = (props) => {
                   showCommentList={props.showCommentList}
                   numComments={props.numComments}
                 />
-                <CommentForm />
+                {props.jokeComment ? (
+                  <CommentList comments={props.jokeComment} />
+                ) : (
+                  ""
+                )}
+                <CommentForm
+                  comment={props.comment}
+                  handleChangeComment={props.handleChangeComment}
+                  submitJokeComment={props.submitJokeComment}
+                />
               </div>
             </div>
           </div>
