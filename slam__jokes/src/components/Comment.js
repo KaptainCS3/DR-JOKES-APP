@@ -1,5 +1,6 @@
 import React from "react";
 const Comment = (props) => {
+  console.log(props);
   return (
     <article
       className={`cursor-pointer dark:bg-slate-400 sm:w-full  px-[2rem] mr-0 my-4 py-[0.5rem] shadow rounded-xl flex flex-col`}
