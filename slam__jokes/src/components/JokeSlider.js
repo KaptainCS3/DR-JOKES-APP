@@ -56,6 +56,9 @@ const JokeSlider = (props) => {
               thumbsUp={props.thumbsUp}
               showCommentList={showCommentList}
               numComments={props.numComments}
+              comment={props.comment}
+              handleChangeComment={props.handleChangeComment}
+              submitJokeComment={props.submitJokeComment}
             />
             {/* flex justify-center items-center w-64 h-64 my-16 rounded-xl shadow-2xl flex-col mr-4 */}
           </motion.div>
