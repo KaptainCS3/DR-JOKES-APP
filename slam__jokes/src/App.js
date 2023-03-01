@@ -18,6 +18,9 @@ const App = () => {
     comment: "",
   });
 
+  let joke_id;
+
+  const [responseData, setResponseData] = useState([]);
   const [showComment, setShowComment] = useState(true);
   const toggleComment = () => {
     setShowComment(!showComment);
@@ -167,6 +170,7 @@ const App = () => {
     });
   };
 
+  joke_id = catIndex + 1;
   const submitJokeComment = async (event) => {
     event.preventDefault();
     const response = await fetch(APIComment, {
@@ -176,7 +180,7 @@ const App = () => {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        joke_id: Math.floor(Math.random() * 35) + 1,
+        joke_id: joke_id,
         comment: comment.comment,
       }),
     });
@@ -189,14 +193,17 @@ const App = () => {
       setComment({
         comment: "",
       });
+      setResponseData(data);
     }
   };
+  console.log(responseData);
   //!alternative using local storage
   // const comments = fetchData;
   // localStorage.setItem("comments", JSON.stringify(comments));
   // var storedNames = JSON.parse(localStorage.getItem("comments"));
   let numComments;
-  console.log(numComments);
+  // const [commentNum, setCommentNum] = useState(0);
+  // setCommentNum(numComments);
   const jokeCommentNum = fetchData.map((el) => {
     if (el.comments.length !== 0) {
       if (catIndex === el.id - 1) {
@@ -207,27 +214,29 @@ const App = () => {
       }
     }
   });
+  // const reRender = fetchData.map((el) => {
+  //   if (el.comments.length !== 0) {
+  //     return el.comments.map((cmt) => {
+  //       if (catIndex === el.id - 1) {
+  //         return (el.comments = [responseData.comment, ...el.comments]);
+  //       } else {
+  //         return null;
+  //       }
+  //     });
+  //   }
+  // });
   const jokeComment = fetchData.map((el) => {
     if (el.comments.length !== 0) {
       return el.comments.map((cmt) => {
         if (catIndex === el.id - 1) {
-          return (
-            <article
-              className={`cursor-pointer dark:bg-slate-400 sm:w-full  px-[2rem] mr-0 my-4 py-[0.5rem] shadow rounded-xl flex flex-col`}
-            >
-              <h4 className={`mb-[0.25rem] font-bold`}>
-                @{cmt.commenter.name}
-              </h4>
-              <p className={`mb-[0.75rem]`}>{cmt.comment}</p>
-            </article>
-          );
+          return <Comment comment={cmt.comment} useName={cmt.commenter.name} />;
         } else {
           return null;
         }
       });
     }
   });
-  console.log(fetchData);
+  // console.log(jokeComment);
   return (
     <div className="w-full lg:flex min-h-[100vh]">
       {fetchData.length === 0 ? (
@@ -275,18 +284,18 @@ const App = () => {
               catIndex={catIndex}
               setCatIndex={setCatIndex}
               fetchData={fetchData}
-              like={like}
-              disLike={disLike}
+              like={like} //like function
+              disLike={disLike} //dislike function
               thumbsDown={thumbsDown}
               thumbsUp={thumbsUp}
               jokeComment={jokeComment}
               showComment={showComment}
               setShowComment={setShowComment}
-              numComments={numComments}
-              comment={comment}
+              numComments={numComments} //number of comment for joke
+              comment={comment} //comment content
               handleChangeComment={handleChangeComment}
               submitJokeComment={submitJokeComment}
-              toggleComment={toggleComment}
+              toggleComment={toggleComment} // toggle comment show/hide
             />
             <CreateJoke
               createJokeCategory={createJokeCategory}
