@@ -7,7 +7,6 @@ import ChevronRight from "./ChevronRight";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 const Jokes = (props) => {
-  console.log(props.showComment);
   const object = props.fetchData.map((el) => {
     return <JokeContainer punchline={el.punchline} setup={el.setup} />;
   });
