@@ -8,7 +8,7 @@ import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 const Jokes = (props) => {
   const object = props.fetchData.map((el) => {
-    return <JokeContainer punchline={el.punchline} setup={el.setup} />;
+    return <JokeContainer key ={el.id} punchline={el.punchline} setup={el.setup} />;
   });
 
   const show = {
