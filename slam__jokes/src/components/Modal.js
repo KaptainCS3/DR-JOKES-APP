@@ -40,12 +40,13 @@ const Modal = (props) => {
     }
     props.setCatIndex(checkNumber(randomIndex));
   };
-
+  console.log(props.showModal);
   return (
     <>
       {props.showModal ? (
-        <>
-          <div className="flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none items-center p-8">
+        <div className="fixed h-full top-0 left-0 over z-[1000] bg-red-600 w-full opacity-[0.9]">
+          <div className="relative w-full">Some Text</div>
+          {/* <div className="flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none items-center p-8">
             <div className="relative w-1/1 my-6 mx-auto max-w-3/4 lg:p-32 md:p-12">
               <button
                 className="mb-8 text-black text-3xl leading-none font-bold outline-none focus:outline-none flex justify-center items-center w-full"
@@ -54,15 +55,15 @@ const Modal = (props) => {
                 <span className="dark:text-white bg-transparent text-black opacity-1 h-6 w-6 text-2xl z-40 block outline-none focus:outline-none">
                   ×
                 </span>
-              </button>
-              {/*content*/}
-              <div className="dark:text-slate-400 border-0 rounded-lg shadow-lg relative flex flex-col bg-white outline-none focus:outline-none">
-                {/*header*/}
-                <div className="flex items-start justify-between p-5 rounded-t">
-                  {/* <h3 className="text-3xl font-semibold">Modal Title</h3> */}
-                </div>
-                {/*body*/}
-                <div className="w-full overflow-hidden">
+              </button> */}
+          {/*content*/}
+          {/* <div className="dark:text-slate-400 border-0 rounded-lg shadow-lg relative flex flex-col bg-white outline-none focus:outline-none"> */}
+          {/*header*/}
+          {/* <div className="flex items-start justify-between p-5 rounded-t"> */}
+          {/* <h3 className="text-3xl font-semibold">Modal Title</h3> */}
+          {/* </div> */}
+          {/*body*/}
+          {/* <div className="w-full overflow-hidden">
                   <div className="flex transition-transform ease-out duration-500 dark:text-[#000]">
                     {props.object[props.catIndex]}
                   </div>
@@ -94,9 +95,9 @@ const Modal = (props) => {
                 />
               </div>
             </div>
-          </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-        </>
+          </div> */}
+          {/* <div className="opacity-25 fixed inset-0 z-40 bg-black"></div> */}
+        </div>
       ) : null}
     </>
   );
