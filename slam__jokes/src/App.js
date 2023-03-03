@@ -4,6 +4,7 @@ import "./App.css";
 import Welcome from "./components/Welcome";
 import Jokes from "./components/Jokes";
 import CreateJoke from "./components/CreateJoke";
+import CreateJokes from "./components/CreateJokes";
 import Footer from "./components/Footer";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import useDarkMode from "./hooks/useDarkMode";
@@ -198,13 +199,13 @@ const App = () => {
   };
   console.log(responseData);
   //!alternative using local storage
-  // const comments = fetchData;
-  // localStorage.setItem("comments", JSON.stringify(comments));
-  // var storedNames = JSON.parse(localStorage.getItem("comments"));
+  const comments = fetchData;
+  localStorage.setItem("comments", JSON.stringify(comments));
+  var storedNames = JSON.parse(localStorage.getItem("comments"));
   let numComments;
   // const [commentNum, setCommentNum] = useState(0);
   // setCommentNum(numComments);
-  const jokeCommentNum = fetchData.map((el) => {
+  const jokeCommentNum = storedNames.map((el) => {
     if (el.comments.length !== 0) {
       if (catIndex === el.id - 1) {
         if (numComments === "undefined") return (numComments = 0);
@@ -214,18 +215,8 @@ const App = () => {
       }
     }
   });
-  // const reRender = fetchData.map((el) => {
-  //   if (el.comments.length !== 0) {
-  //     return el.comments.map((cmt) => {
-  //       if (catIndex === el.id - 1) {
-  //         return (el.comments = [responseData.comment, ...el.comments]);
-  //       } else {
-  //         return null;
-  //       }
-  //     });
-  //   }
-  // });
-  const jokeComment = fetchData.map((el) => {
+
+  const jokeComment = storedNames.map((el) => {
     if (el.comments.length !== 0) {
       return el.comments.map((cmt) => {
         if (catIndex === el.id - 1) {
@@ -236,7 +227,7 @@ const App = () => {
       });
     }
   });
-  // console.log(jokeComment);
+
   return (
     <div className="w-full lg:flex min-h-[100vh]">
       {fetchData.length === 0 ? (
@@ -310,6 +301,17 @@ const App = () => {
             />
             {/* //!Joke component from Tablet and Desktop */}
             <div>
+              <CreateJokes
+                createJokeCategory={createJokeCategory}
+                createJokeData={createJokeData}
+                createJokeHandleChange={createJokeHandleChange}
+                handleCreateDataChange={handleCreateDataChange}
+                displayCreateJoke={displayCreateJoke}
+                setDisplayCreateJoke={setDisplayCreateJoke}
+                handleClick={handleClick}
+                submitJokeData={submitJokeData}
+                closeCreateJoke={closeCreateJoke}
+              />
               <JokeSlider
                 selectCategory={selectCategory}
                 catValue={catValue}
@@ -366,8 +368,3 @@ const App = () => {
 };
 
 export default App;
-
-//  const cmt = storedNames.map((el) => {
-//    if (el.comments.length !== 0)
-//      if (catIndex === el.id) return el.comments.length;
-//  });
