@@ -25,6 +25,7 @@ const App = () => {
   const toggleComment = () => {
     setShowComment(!showComment);
   };
+
   //!Show modal state
   const [showModal, setShowModal] = useState(false);
 
@@ -69,8 +70,7 @@ const App = () => {
 
   //!response state data
   const [fetchData, setFetchData] = useState([]);
-
-  // console.log(fetchData);
+  // const [commentList, setCommentList] = useState([]);
   //!like and dislike joke state
   const [like, setLike] = useState(false);
   const [disLike, setDisLike] = useState(false);
@@ -188,17 +188,15 @@ const App = () => {
       throw new Error(response.error);
     } else {
       const data = await response.json();
-      console.log(data, response);
+      console.log(data);
+      // setCommentList(data);
       alert("Comment successfully Added 😎😄😅😎");
       setComment({
         comment: "",
       });
     }
   };
-  //!alternative using local storage
-  // const comments = fetchData;
-  // localStorage.setItem("comments", JSON.stringify(comments));
-  // var storedNames = JSON.parse(localStorage.getItem("comments"));
+
   let numComments;
   const jokeCommentNum = fetchData.map((el) => {
     if (el.comments.length !== 0) {
@@ -211,7 +209,6 @@ const App = () => {
     }
   });
 
-  // console.log(fetchData);
   const jokeComment = fetchData.map((el) => {
     if (el.comments.length !== 0) {
       return el.comments.map((cmt) => {
@@ -223,27 +220,29 @@ const App = () => {
       });
     }
   });
-
+  // console.log(jokeComment);
   const myJokes = fetchData.filter((el) => {
-      // console.log(el);
+    return el.category_id === selectCategory;
   });
 
   const show = {
     display: `${showComment ? "none" : ""}`,
   };
+
   console.log(myJokes);
 
-  //  const updatedJokes = fetchData.map((jk) => {
-  //     if (jk.id === newComment.joke_id) {
-  //       jk.comments = [newComment, ...jk.comments];
-  //     }
-  //     return jk;
-  //   });
-
-  //   setJokes(updatedJokes);
-  // };
-
-console.log(fetchData);
+  const updateJokes = fetchData.map((el) => {
+    if (el.comments.length !== 0) {
+      return el.comments.map((cmt) => {
+        if (catIndex === el.id - 1) {
+         
+        } else {
+          return null;
+        }
+      });
+    }
+  });
+  console.log(updateJokes);
   return (
     <div className="w-full lg:flex min-h-[100vh]">
       {fetchData.length === 0 ? (
