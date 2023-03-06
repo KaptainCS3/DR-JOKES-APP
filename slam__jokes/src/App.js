@@ -21,7 +21,6 @@ const App = () => {
 
   let joke_id;
 
-  const [responseData, setResponseData] = useState([]);
   const [showComment, setShowComment] = useState(true);
   const toggleComment = () => {
     setShowComment(!showComment);
@@ -83,7 +82,7 @@ const App = () => {
     setDisLike(!disLike);
     setLike(false);
   };
-  // const [postJoke, setPostJoke] = useState([]);
+
   //! Dark mode handler
   const toggleDarkMode = (checked) => {
     setColorTheme(colorTheme);
@@ -194,18 +193,14 @@ const App = () => {
       setComment({
         comment: "",
       });
-      setResponseData(data);
     }
   };
-  console.log(responseData);
   //!alternative using local storage
-  const comments = fetchData;
-  localStorage.setItem("comments", JSON.stringify(comments));
-  var storedNames = JSON.parse(localStorage.getItem("comments"));
+  // const comments = fetchData;
+  // localStorage.setItem("comments", JSON.stringify(comments));
+  // var storedNames = JSON.parse(localStorage.getItem("comments"));
   let numComments;
-  // const [commentNum, setCommentNum] = useState(0);
-  // setCommentNum(numComments);
-  const jokeCommentNum = storedNames.map((el) => {
+  const jokeCommentNum = fetchData.map((el) => {
     if (el.comments.length !== 0) {
       if (catIndex === el.id - 1) {
         if (numComments === "undefined") return (numComments = 0);
@@ -216,7 +211,8 @@ const App = () => {
     }
   });
 
-  const jokeComment = storedNames.map((el) => {
+  // console.log(fetchData);
+  const jokeComment = fetchData.map((el) => {
     if (el.comments.length !== 0) {
       return el.comments.map((cmt) => {
         if (catIndex === el.id - 1) {
@@ -228,6 +224,26 @@ const App = () => {
     }
   });
 
+  const myJokes = fetchData.filter((el) => {
+      // console.log(el);
+  });
+
+  const show = {
+    display: `${showComment ? "none" : ""}`,
+  };
+  console.log(myJokes);
+
+  //  const updatedJokes = fetchData.map((jk) => {
+  //     if (jk.id === newComment.joke_id) {
+  //       jk.comments = [newComment, ...jk.comments];
+  //     }
+  //     return jk;
+  //   });
+
+  //   setJokes(updatedJokes);
+  // };
+
+console.log(fetchData);
   return (
     <div className="w-full lg:flex min-h-[100vh]">
       {fetchData.length === 0 ? (
@@ -287,6 +303,7 @@ const App = () => {
               handleChangeComment={handleChangeComment}
               submitJokeComment={submitJokeComment}
               toggleComment={toggleComment} // toggle comment show/hide
+              show={show}
             />
             <CreateJoke
               createJokeCategory={createJokeCategory}
@@ -311,6 +328,7 @@ const App = () => {
                 handleClick={handleClick}
                 submitJokeData={submitJokeData}
                 closeCreateJoke={closeCreateJoke}
+                show={show}
               />
               <JokeSlider
                 selectCategory={selectCategory}
@@ -330,7 +348,10 @@ const App = () => {
                 comment={comment}
                 handleChangeComment={handleChangeComment}
                 submitJokeComment={submitJokeComment}
+                toggleComment={toggleComment} // toggle comment show/hide
+                show={show}
               />
+              {/* <h1>Random Joke of the day</h1> */}
               <JokeSlider
                 selectCategory={selectCategory}
                 catValue={catValue}
@@ -350,6 +371,7 @@ const App = () => {
                 comment={comment}
                 handleChangeComment={handleChangeComment}
                 submitJokeComment={submitJokeComment}
+                toggleComment={toggleComment} // toggle comment show/hide
               />
             </div>
             {/* //!Desktop help component */}
