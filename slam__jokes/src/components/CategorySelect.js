@@ -8,25 +8,28 @@ const CategorySelect = (props) => {
         onChange={props.handleChange}
         value={props.selectCategory}
       >
-        <option className="text-[#000]">Select Category.......</option>
+        <option className="text-[#000]" value={null}>
+          Select Category.......
+        </option>
         <option className="text-[#000]" value={1} selected>
-          African Jokes
+          👨‍👨‍👧‍👧 Family Jokes
         </option>
         <option className="text-[#000]" value={2}>
-          Western World Jokes
+          {" "}
+          🧑🏼 Political Jokes
         </option>
         <option className="text-[#000]" value={3}>
-          Family Jokes
+          🕍 Religions Jokes
         </option>
         <option className="text-[#000]" value={4}>
-          Relationship Jokes
+          🏫 Education Jokes
         </option>
         <option className="text-[#000]" value={5}>
-          Education Jokes
+          ❤ Emotional Jokes
         </option>
-        <option className="text-[#000]" value={6}>
+        {/* <option className="text-[#000]" value={6}>
           Tech Jokes
-        </option>
+        </option> */}
       </select>
     </div>
   );
