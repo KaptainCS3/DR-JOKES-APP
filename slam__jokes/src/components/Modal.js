@@ -11,65 +11,58 @@ const Modal = (props) => {
 
   //! This function helps us check and make sure we don't go above the length of our array and below its length
   const checkNumber = (number) => {
-    if (number > props.object.length - 1) {
+    if (number > props.objectModal.length - 1) {
       return 0;
     }
-    if (number < 0) return props.object.length - 1;
+    if (number < 0) return props.objectModal.length - 1;
     return number;
   };
 
   //! This function help us in moving to the previous Joke element
   const prevJoke = () => {
     return props.setCatIndex((curr) =>
-      curr === 0 ? props.object.length - 1 : curr - 1
+      curr === 0 ? props.objectModal.length - 1 : curr - 1
     );
   };
 
   //! This function help us in moving to the next Joke element
   const nextJoke = () => {
     return props.setCatIndex((curr) =>
-      curr === props.object.length - 1 ? 0 : curr + 1
+      curr === props.objectModal.length - 1 ? 0 : curr + 1
     );
   };
 
   //! return random Joke Index
   const randomJoke = () => {
-    let randomIndex = Math.floor(Math.random() * props.object.length);
+    let randomIndex = Math.floor(Math.random() * props.objectModal.length);
     if (randomIndex === props.catIndex) {
       randomIndex = props.catIndex + 1;
     }
     props.setCatIndex(checkNumber(randomIndex));
   };
-  console.log(props.showModal);
   return (
     <>
       {props.showModal ? (
-        <div className="fixed h-full top-0 left-0 over z-[1000] bg-red-600 w-full opacity-[0.9]">
-          <div className="relative w-full">Some Text</div>
-          {/* <div className="flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none items-center p-8">
-            <div className="relative w-1/1 my-6 mx-auto max-w-3/4 lg:p-32 md:p-12">
+        <>
+          <div className="flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none items-center p-8">
+            <div className="relative w-[68%] mx-auto max-w-3/4 lg:p-32">
               <button
                 className="mb-8 text-black text-3xl leading-none font-bold outline-none focus:outline-none flex justify-center items-center w-full"
                 onClick={() => props.setShowModal(false)}
               >
-                <span className="dark:text-white bg-transparent text-black opacity-1 h-6 w-6 text-2xl z-40 block outline-none focus:outline-none">
+                <span className="dark:text-white bg-transparent text-black opacity-1 h-6 w-6 text-4xl z-40 block outline-none focus:outline-none">
                   ×
                 </span>
-              </button> */}
-          {/*content*/}
-          {/* <div className="dark:text-slate-400 border-0 rounded-lg shadow-lg relative flex flex-col bg-white outline-none focus:outline-none"> */}
-          {/*header*/}
-          {/* <div className="flex items-start justify-between p-5 rounded-t"> */}
-          {/* <h3 className="text-3xl font-semibold">Modal Title</h3> */}
-          {/* </div> */}
-          {/*body*/}
-          {/* <div className="w-full overflow-hidden">
-                  <div className="flex transition-transform ease-out duration-500 dark:text-[#000]">
-                    {props.object[props.catIndex]}
+              </button>
+              <div className="dark:text-slate-400 border-0 rounded-lg shadow-lg relative flex flex-col bg-white outline-none focus:outline-none">
+                {/*body*/}
+                <div className="w-full overflow-hidden">
+                  <div className="w-full flex transition-transform ease-out duration-500 dark:text-[#000]">
+                    {props.objectModal[props.catIndex]}
                   </div>
                 </div>
               </div>
-              <div className="absolute flex justify-between inset-0 items-center p-4">
+              <div className="absolute flex justify-between inset-0 items-center -mx-16 -mt-24">
                 <ChevronLeft prevJoke={prevJoke} />
                 <ChevronRight nextJoke={nextJoke} />
               </div>
@@ -82,25 +75,27 @@ const Modal = (props) => {
                   thumbsUp={props.thumbsUp}
                   showCommentList={props.showCommentList}
                   numComments={props.numComments}
+                  toggleComment={props.toggleComment}
                 />
-                {props.jokeComment ? (
-                  <CommentList comments={props.jokeComment} />
-                ) : (
-                  ""
-                )}
                 <CommentForm
                   comment={props.comment}
                   handleChangeComment={props.handleChangeComment}
                   submitJokeComment={props.submitJokeComment}
                 />
+                <div className="w-full h-2" style={props.show}>
+                  {props.jokeComment ? (
+                    <CommentList comments={props.jokeComment} />
+                  ) : (
+                    ""
+                  )}
+                </div>
               </div>
             </div>
-          </div> */}
-          {/* <div className="opacity-25 fixed inset-0 z-40 bg-black"></div> */}
-        </div>
+          </div>
+          <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>
+        </>
       ) : null}
     </>
   );
 };
-
 export default Modal;
