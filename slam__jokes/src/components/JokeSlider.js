@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import style from "../styles/container.module.css";
 import JokeContainer from "./JokeContainer";
+import JokesContainer from "./JokesContainer";
 import Modal from "./Modal";
 const JokeSlider = (props) => {
   const showCommentList = () => {
@@ -16,6 +17,15 @@ const JokeSlider = (props) => {
   const object = props.fetchData.map((el) => {
     return (
       <JokeContainer
+        punchline={el.punchline}
+        setup={el.setup}
+        toggle={toggle}
+      />
+    );
+  });
+  const objectModal = props.fetchData.map((el) => {
+    return (
+      <JokesContainer
         punchline={el.punchline}
         setup={el.setup}
         toggle={toggle}
@@ -47,18 +57,22 @@ const JokeSlider = (props) => {
             <Modal
               showModal={props.showModal}
               setShowModal={props.setShowModal}
-              object={object}
+              showComment={props.showComment}
+              objectModal={objectModal}
               catIndex={props.catIndex}
               setCatIndex={props.setCatIndex}
               like={props.like}
               disLike={props.disLike}
               thumbsDown={props.thumbsDown}
               thumbsUp={props.thumbsUp}
+              jokeComment={props.jokeComment}
               showCommentList={showCommentList}
               numComments={props.numComments}
               comment={props.comment}
               handleChangeComment={props.handleChangeComment}
               submitJokeComment={props.submitJokeComment}
+              toggleComment={props.toggleComment}
+              show={props.show}
             />
             {/* flex justify-center items-center w-64 h-64 my-16 rounded-xl shadow-2xl flex-col mr-4 */}
           </motion.div>
