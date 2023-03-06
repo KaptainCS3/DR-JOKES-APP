@@ -9,6 +9,7 @@ import {
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import CategorySelect from "./CategorySelect";
 import CreateJoke from "./CreateJoke";
+import CreateJokes from "./CreateJokes";
 const Nav = (props) => {
   const showForm = () => {
     props.handleClick();
@@ -88,9 +89,8 @@ const Nav = (props) => {
         className={`table__view w-[75%] text-white dark:text-gray-300 font-bold flex justify-between sm:hidden lg:hidden`}
       >
         <div className="flex w-full justify-evenly">
-          <button className="flex items-center">
+          <button className="flex items-center" onClick={showForm}>
             Create Joke
-            <CreateJoke />
           </button>
           <button>
             <CategorySelect
@@ -116,9 +116,8 @@ const Nav = (props) => {
 
       <div className="hamburger__menu text-white h-full flex flex-col justify-between md:hidden sm:hidden">
         <div>
-          <button className="block">
+          <button className="block" onClick={showForm}>
             Create Joke
-            <CreateJoke />
           </button>
           <button className="block">
             <CategorySelect
