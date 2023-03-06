@@ -11,9 +11,6 @@ const Jokes = (props) => {
     return <JokeContainer key ={el.id} punchline={el.punchline} setup={el.setup} />;
   });
 
-  const show = {
-    display: `${props.showComment ? "none" : ""}`,
-  };
   //! The review is same as a carousel you know in css and normal js
 
   //! This function helps us check and make sure we don't go above the length of our array and below its length
@@ -71,14 +68,14 @@ const Jokes = (props) => {
         numComments={props.numComments}
         toggleComment={props.toggleComment}
       />
-      <div className="w-full" style={show}>
-        {props.jokeComment ? <CommentList comments={props.jokeComment} /> : ""}
-      </div>
       <CommentForm
         handleChangeComment={props.handleChangeComment}
         comment={props.comment}
         submitJokeComment={props.submitJokeComment}
       />
+      <div className="w-full" style={props.show}>
+        {props.jokeComment ? <CommentList comments={props.jokeComment} /> : ""}
+      </div>
     </div>
   );
 };
