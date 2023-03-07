@@ -20,6 +20,7 @@ const JokeSlider = (props) => {
         punchline={el.punchline}
         setup={el.setup}
         toggle={toggle}
+        key={el.id}
       />
     );
   });
@@ -29,6 +30,7 @@ const JokeSlider = (props) => {
         punchline={el.punchline}
         setup={el.setup}
         toggle={toggle}
+        key={el.id}
       />
     );
   });
