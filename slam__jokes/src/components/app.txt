@@ -1,0 +1,109 @@
+<div className="lg:flex min-h-[100vh]">
+      <Nav
+        colorTheme={colorTheme}
+        setColorTheme={setColorTheme}
+        isDarkMode={isDarkMode}
+        setDarkMode={setColorTheme}
+        toggleDarkMode={toggleDarkMode}
+        selectCategory={selectCategory}
+        setSelectCategory={setSelectCategory}
+        handleChange={handleChange}
+        handleClick={handleClick}
+        displayCreateJoke={displayCreateJoke}
+        setDisplayCreateJoke={setDisplayCreateJoke}
+        isNavBar={isNavBar}
+        setIsNavBar={setIsNavBar}
+      />
+      <main className="dark:bg-[#121212] lg:w-4/5">
+        <div className="lg:flex justify-between items-center h-16 px-4">
+          <Welcome selectCategory={selectCategory} />
+          <div className="flex items-center sm:hidden md:hidden">
+            {/* toggle dark mode */}
+            <span className="pr-4 font-bold text-xl dark:text-white">{isDarkMode ? "Light" : "Dark"}</span>
+            <DarkModeSwitch
+              // className="sm:hidden md:hidden"
+              size={35}
+              checked={isDarkMode}
+              onChange={toggleDarkMode}
+            />
+          </div>
+        </div>
+        <Jokes
+          selectCategory={selectCategory}
+          catValue={catValue}
+          catIndex={catIndex}
+          setCatIndex={setCatIndex}
+        />
+        <CreateJoke
+          createJokeCategory={createJokeCategory}
+          createJokeData={createJokeData}
+          handleSubmit={handleSubmit}
+          createJokeHandleChange={createJokeHandleChange}
+          handleCreateDataChange={handleCreateDataChange}
+          displayCreateJoke={displayCreateJoke}
+          setDisplayCreateJoke={setDisplayCreateJoke}
+          handleClick={handleClick}
+          closeCreateJoke={closeCreateJoke}
+        />
+        <div>
+          <JokeSlider
+            selectCategory={selectCategory}
+            catValue={catValue}
+            catIndex={catIndex}
+            setCatIndex={setCatIndex}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
+          <JokeSlider
+            selectCategory={selectCategory}
+            catValue={catValue}
+            catIndex={catIndex}
+            setCatIndex={setCatIndex}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
+        </div>
+      </main>
+      <Footer />
+    </div>
+
+      const testData = data.map((el) => {
+    if (el.comments.length !== 0) {
+      return el.comments.map((cmt) => {
+        return cmt.comment;
+      });
+    } else {
+      return false;
+    }
+  });
+
+
+
+
+    const jokeComment = allJokes.map((el) => {
+    if (el.comments.length !== 0) {
+      return el.comments.map((cmt) => {
+        if (catIndex === el.id - 1) {
+          return <Comment comment={cmt.comment} useName={cmt.commenter.name} />;
+        } else {
+          return null;
+        }
+      });
+    }
+  });
+
+  const jokeCommentNum = allJokes.map((el) => {
+    if (el.comments.length !== 0) {
+      if (catIndex === el.id - 1) {
+        if (numComments === "undefined") return (numComments = 0);
+        else return (numComments = el.comments.length);
+      } else {
+        return console.log("No comments found");
+      }
+    }
+  });
+  // console.table(allJokes);
+  const values = allJokes.map((el) => {
+    return el.id;
+  });
+  console.log(values[catIndex]);
