@@ -13,6 +13,7 @@ import catValue from "./categoryValue";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 import Comment from "./components/Comment";
+import Jump from "react-reveal/Jump";
 const App = () => {
   //!Add comment state
   const [comment, setComment] = useState({
@@ -87,11 +88,6 @@ const App = () => {
   const toggleDarkMode = (checked) => {
     setColorTheme(colorTheme);
     setDarkMode(checked);
-  };
-
-  //!track selected category value change
-  const handleChange = (e) => {
-    setSelectCategory(e.target.value);
   };
 
   const createJokeHandleChange = (event) => {
@@ -170,6 +166,7 @@ const App = () => {
     });
   };
 
+  const allJokes = fetchData.filter((el) => el.category_id === selectCategory);
   joke_id = catIndex + 1;
   const submitJokeComment = async (event) => {
     event.preventDefault();
@@ -189,7 +186,7 @@ const App = () => {
     } else {
       const data = await response.json();
       console.log(data);
-      // setCommentList(data);
+
       alert("Comment successfully Added 😎😄😅😎");
       setComment({
         comment: "",
@@ -198,7 +195,7 @@ const App = () => {
   };
 
   let numComments;
-  const jokeCommentNum = fetchData.map((el) => {
+  const jokeCommentNum = allJokes.map((el) => {
     if (el.comments.length !== 0) {
       if (catIndex === el.id - 1) {
         if (numComments === "undefined") return (numComments = 0);
@@ -209,10 +206,12 @@ const App = () => {
     }
   });
 
+  console.log(allJokes);
   const jokeComment = fetchData.map((el) => {
     if (el.comments.length !== 0) {
       return el.comments.map((cmt) => {
-        if (catIndex === el.id - 1) {
+        if (cmt.joke_id === selectCategory) {
+          console.log(cmt);
           return <Comment comment={cmt.comment} useName={cmt.commenter.name} />;
         } else {
           return null;
@@ -220,29 +219,10 @@ const App = () => {
       });
     }
   });
-  // console.log(jokeComment);
-  const myJokes = fetchData.filter((el) => {
-    return el.category_id === selectCategory;
-  });
-
   const show = {
     display: `${showComment ? "none" : ""}`,
   };
-
-  console.log(myJokes);
-
-  const updateJokes = fetchData.map((el) => {
-    if (el.comments.length !== 0) {
-      return el.comments.map((cmt) => {
-        if (catIndex === el.id - 1) {
-         
-        } else {
-          return null;
-        }
-      });
-    }
-  });
-  console.log(updateJokes);
+  // console.log(allJokes);
   return (
     <div className="w-full lg:flex min-h-[100vh]">
       {fetchData.length === 0 ? (
@@ -259,7 +239,6 @@ const App = () => {
             toggleDarkMode={toggleDarkMode}
             selectCategory={selectCategory}
             setSelectCategory={setSelectCategory}
-            handleChange={handleChange}
             handleClick={handleClick}
             displayCreateJoke={displayCreateJoke}
             setDisplayCreateJoke={setDisplayCreateJoke}
@@ -274,22 +253,23 @@ const App = () => {
                 <span className="pr-4 font-bold text-xl dark:text-white">
                   {isDarkMode ? "Light" : "Dark"}
                 </span>
-                <DarkModeSwitch
-                  // className="sm:hidden md:hidden"
-                  size={35}
-                  checked={isDarkMode}
-                  onChange={toggleDarkMode}
-                />
+                <Jump>
+                  <DarkModeSwitch
+                    // className="sm:hidden md:hidden"
+                    size={35}
+                    checked={isDarkMode}
+                    onChange={toggleDarkMode}
+                  />
+                </Jump>
               </div>
             </div>
 
             {/* //! Main Mobile component */}
             <Jokes
               selectCategory={selectCategory}
-              // catValue={catValue}
               catIndex={catIndex}
               setCatIndex={setCatIndex}
-              fetchData={fetchData}
+              fetchData={allJokes}
               like={like} //like function
               disLike={disLike} //dislike function
               thumbsDown={thumbsDown}
@@ -336,7 +316,7 @@ const App = () => {
                 setCatIndex={setCatIndex}
                 showModal={showModal}
                 setShowModal={setShowModal}
-                fetchData={fetchData}
+                fetchData={allJokes}
                 like={like}
                 disLike={disLike}
                 thumbsDown={thumbsDown}
@@ -358,7 +338,7 @@ const App = () => {
                 setCatIndex={setCatIndex}
                 showModal={showModal}
                 setShowModal={setShowModal}
-                fetchData={fetchData}
+                fetchData={allJokes}
                 like={like}
                 disLike={disLike}
                 thumbsDown={thumbsDown}
