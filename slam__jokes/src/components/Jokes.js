@@ -10,7 +10,7 @@ const Jokes = (props) => {
   const object = props.fetchData.map((el) => {
     return <JokeContainer key ={el.id} punchline={el.punchline} setup={el.setup} />;
   });
-
+// console.log(object.length);
   //! The review is same as a carousel you know in css and normal js
 
   //! This function helps us check and make sure we don't go above the length of our array and below its length
