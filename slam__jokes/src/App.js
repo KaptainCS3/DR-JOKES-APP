@@ -12,7 +12,6 @@ import JokeSlider from "./components/JokeSlider";
 import catValue from "./categoryValue";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
-import Comment from "./components/Comment";
 import Jump from "react-reveal/Jump";
 const App = () => {
   //!Add comment state
@@ -56,7 +55,7 @@ const App = () => {
   //!track input create form
   //! select joke category state
   const [createJokeCategory, setCreateJokeCategory] = useState(1);
-
+console.log(createJokeCategory);
   //! form data input joke
   const [createJokeData, setCreateJokeData] = useState({
     punchline: "",
@@ -71,7 +70,7 @@ const App = () => {
 
   //!response state data
   const [fetchData, setFetchData] = useState([]);
-  // const [commentList, setCommentList] = useState([]);
+
   //!like and dislike joke state
   const [like, setLike] = useState(false);
   const [disLike, setDisLike] = useState(false);
@@ -156,6 +155,7 @@ const App = () => {
     }
   };
 
+  console.log(createJokeCategory);
   const handleChangeComment = (event) => {
     const { name, value } = event.target;
     setComment((prevComment) => {
@@ -168,61 +168,48 @@ const App = () => {
 
   const allJokes = fetchData.filter((el) => el.category_id === selectCategory);
   joke_id = catIndex + 1;
-  const submitJokeComment = async (event) => {
-    event.preventDefault();
-    const response = await fetch(APIComment, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        joke_id: joke_id,
-        comment: comment.comment,
-      }),
-    });
-    if (!response.ok) {
-      throw new Error(response.error);
-    } else {
-      const data = await response.json();
-      console.log(data);
+  // const submitJokeComment = async (event) => {
+  //   event.preventDefault();
+  //   const response = await fetch(APIComment, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       joke_id: joke_id,
+  //       comment: comment.comment,
+  //     }),
+  //   });
+  //   if (!response.ok) {
+  //     throw new Error(response.error);
+  //   } else {
+  //     const data = await response.json();
+  //     console.log(data);
 
-      alert("Comment successfully Added 😎😄😅😎");
-      setComment({
-        comment: "",
-      });
-    }
-  };
+  //     alert("Comment successfully Added 😎😄😅😎");
+  //     setComment({
+  //       comment: "",
+  //     });
+  //   }
+  // };
 
-  let numComments;
-  const jokeCommentNum = allJokes.map((el) => {
-    if (el.comments.length !== 0) {
-      if (catIndex === el.id - 1) {
-        if (numComments === "undefined") return (numComments = 0);
-        else numComments = el.comments.length;
-      } else {
-        return console.log("No comments found");
+  // const show = {
+  //   display: `${showComment ? "none" : ""}`,
+  // };
+  const onNewCommentReceived = (newComment) => {
+    console.log(`Data sent is  ${newComment}`);
+
+    const updatedJokes = allJokes.map((joke) => {
+      if (joke.id === newComment.data.joke_id) {
+        joke.comments = [newComment.data, ...joke.comments];
       }
-    }
-  });
-
-  console.log(allJokes);
-  const jokeComment = fetchData.map((el) => {
-    if (el.comments.length !== 0) {
-      return el.comments.map((cmt) => {
-        if (cmt.joke_id === selectCategory) {
-          console.log(cmt);
-          return <Comment comment={cmt.comment} useName={cmt.commenter.name} />;
-        } else {
-          return null;
-        }
-      });
-    }
-  });
-  const show = {
-    display: `${showComment ? "none" : ""}`,
+      return joke;
+    });
+    setFetchData(updatedJokes);
+    console.log(updatedJokes);
   };
-  // console.log(allJokes);
+  console.log(createJokeData);
   return (
     <div className="w-full lg:flex min-h-[100vh]">
       {fetchData.length === 0 ? (
@@ -244,6 +231,7 @@ const App = () => {
             setDisplayCreateJoke={setDisplayCreateJoke}
             isNavBar={isNavBar}
             setIsNavBar={setIsNavBar}
+            setCatIndex={setCatIndex}
           />
           <main className="dark:bg-[#121212] lg:w-4/5">
             <div className="lg:flex justify-between items-center h-16 px-4">
@@ -267,6 +255,7 @@ const App = () => {
             {/* //! Main Mobile component */}
             <Jokes
               selectCategory={selectCategory}
+              // catValue={catValue}
               catIndex={catIndex}
               setCatIndex={setCatIndex}
               fetchData={allJokes}
@@ -274,15 +263,17 @@ const App = () => {
               disLike={disLike} //dislike function
               thumbsDown={thumbsDown}
               thumbsUp={thumbsUp}
-              jokeComment={jokeComment}
+              // jokeComment={jokeComment}
               showComment={showComment}
               setShowComment={setShowComment}
-              numComments={numComments} //number of comment for joke
+              // numComments={numComments} //number of comment for joke
               comment={comment} //comment content
               handleChangeComment={handleChangeComment}
-              submitJokeComment={submitJokeComment}
+              // submitJokeComment={submitJokeComment}
               toggleComment={toggleComment} // toggle comment show/hide
-              show={show}
+              // show={show}
+              setComment={setComment}
+              onNewComment={(newComment) => onNewCommentReceived(newComment)}
             />
             <CreateJoke
               createJokeCategory={createJokeCategory}
@@ -307,7 +298,7 @@ const App = () => {
                 handleClick={handleClick}
                 submitJokeData={submitJokeData}
                 closeCreateJoke={closeCreateJoke}
-                show={show}
+                // show={show}
               />
               <JokeSlider
                 selectCategory={selectCategory}
@@ -321,17 +312,18 @@ const App = () => {
                 disLike={disLike}
                 thumbsDown={thumbsDown}
                 thumbsUp={thumbsUp}
-                jokeComment={jokeComment}
+                // jokeComment={jokeComment}
                 showComment={showComment}
-                numComments={numComments}
+                // numComments={numComments}
                 comment={comment}
                 handleChangeComment={handleChangeComment}
-                submitJokeComment={submitJokeComment}
+                // submitJokeComment={submitJokeComment}
                 toggleComment={toggleComment} // toggle comment show/hide
-                show={show}
+                // show={show}
+                onNewComment={(newComment) => onNewCommentReceived(newComment)}
               />
-              {/* <h1>Random Joke of the day</h1> */}
               <JokeSlider
+                // show={show}
                 selectCategory={selectCategory}
                 catValue={catValue}
                 catIndex={catIndex}
@@ -343,14 +335,15 @@ const App = () => {
                 disLike={disLike}
                 thumbsDown={thumbsDown}
                 thumbsUp={thumbsUp}
-                jokeComment={jokeComment}
+                // jokeComment={jokeComment}
                 showComment={showComment}
                 setShowComment={setShowComment}
-                numComments={numComments}
+                // numComments={numComments}
                 comment={comment}
                 handleChangeComment={handleChangeComment}
-                submitJokeComment={submitJokeComment}
+                // submitJokeComment={submitJokeComment}
                 toggleComment={toggleComment} // toggle comment show/hide
+                onNewComment={(newComment) => onNewCommentReceived(newComment)}
               />
             </div>
             {/* //!Desktop help component */}
