@@ -83,11 +83,7 @@ const Modal = (props) => {
                   submitJokeComment={props.submitJokeComment}
                 />
                 <div className="w-full h-2" style={props.show}>
-                  {props.jokeComment ? (
-                    <CommentList comments={props.jokeComment} />
-                  ) : (
-                    ""
-                  )}
+                  {props.allComments}
                 </div>
               </div>
             </div>
