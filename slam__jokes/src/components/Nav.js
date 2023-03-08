@@ -58,7 +58,7 @@ const Nav = (props) => {
               {/* <DropDown /> */}
               <p className="pt-4">
                 <CategorySelect
-                  // handleChange={props.handleChange}
+                  setCatIndex={props.setCatIndex}
                   selectCategory={props.selectCategory}
                   setSelectCategory={props.setSelectCategory}
                 />
@@ -101,6 +101,7 @@ const Nav = (props) => {
           <button>
             <CategorySelect
               // handleChange={props.handleChange}
+              setCatIndex={props.setCatIndex}
               selectCategory={props.selectCategory}
               setSelectCategory={props.setSelectCategory}
             />
@@ -134,6 +135,7 @@ const Nav = (props) => {
           <button className="block">
             <CategorySelect
               // handleChange={props.handleChange}
+              setCatIndex={props.setCatIndex}
               selectCategory={props.selectCategory}
               setSelectCategory={props.setSelectCategory}
             />
