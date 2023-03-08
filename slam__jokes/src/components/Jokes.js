@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Reaction from "./Reaction";
 import JokeContainer from "./JokeContainer";
 import ChevronLeft from "./ChevronLeft";
@@ -6,11 +6,60 @@ import RandomJokeBtn from "./RandomJokeBtn";
 import ChevronRight from "./ChevronRight";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
+import Comment from "./Comment";
 const Jokes = (props) => {
-  const object = props.fetchData.map((el) => {
-    return <JokeContainer key ={el.id} punchline={el.punchline} setup={el.setup} />;
+  const [showComment, setShowComment] = useState(false);
+  const show = {
+    display: showComment ? "block" : "none",
+  };
+  const toggleComment = () => {
+    setShowComment(!showComment);
+  };
+  const joke = props.fetchData.map((el) => el.id);
+  const jokeComment = props.fetchData.map((el) => {
+    if (el.comments.length !== 0) {
+      if (joke[props.catIndex]) return el.comments;
+      return console.log("No comments found");
+    }
   });
-// console.log(object.length);
+  const commentList = typeof jokeComment[props.catIndex] !== "undefined";
+  let allComments;
+  if (commentList) {
+    allComments = jokeComment[props.catIndex].map((el) => {
+      return <Comment comment={el.comment} userName={el.commenter.name} />;
+    });
+  }
+  const APIComment = `https://api.jokes.digitalrenter.com/api/comments`;
+  const submitJokeComment = async (event) => {
+    event.preventDefault();
+    const response = await fetch(APIComment, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        joke_id: joke[props.catIndex],
+        comment: props.comment.comment,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(response.error);
+    } else {
+      const data = await response.json();
+      props.onNewComment(data);
+      alert("Comment successfully Added 😎😄😅😎");
+      props.setComment({
+        comment: "",
+      });
+    }
+  };
+  const object = props.fetchData.map((el) => {
+    return (
+      <JokeContainer key={el.id} punchline={el.punchline} setup={el.setup} />
+    );
+  });
+
   //! The review is same as a carousel you know in css and normal js
 
   //! This function helps us check and make sure we don't go above the length of our array and below its length
@@ -44,6 +93,14 @@ const Jokes = (props) => {
     }
     props.setCatIndex(checkNumber(randomIndex));
   };
+  let numComments;
+
+  const jokeCommentNum = props.fetchData.map((el) => {
+    if (el.comments.length !== 0) {
+      if (joke[props.catIndex]) return (numComments = el.comments.length);
+      return console.log("No comments found");
+    }
+  });
 
   return (
     <div
@@ -65,16 +122,16 @@ const Jokes = (props) => {
         disLike={props.disLike}
         thumbsDown={props.thumbsDown}
         thumbsUp={props.thumbsUp}
-        numComments={props.numComments}
-        toggleComment={props.toggleComment}
+        numComments={jokeCommentNum[props.catIndex]}
+        toggleComment={toggleComment}
       />
       <CommentForm
         handleChangeComment={props.handleChangeComment}
         comment={props.comment}
-        submitJokeComment={props.submitJokeComment}
+        submitJokeComment={submitJokeComment}
       />
-      <div className="w-full" style={props.show}>
-        {props.jokeComment ? <CommentList comments={props.jokeComment} /> : ""}
+      <div className="w-full" style={show}>
+        {allComments}
       </div>
     </div>
   );
