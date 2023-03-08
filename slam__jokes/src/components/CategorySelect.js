@@ -4,6 +4,7 @@ const CategorySelect = (props) => {
   //!track selected category value change
   const handleChange = (e) => {
     props.setSelectCategory(parseInt(e.target.value));
+    props.setCatIndex(0);
   };
   return (
     <Fade left>
