@@ -4,6 +4,7 @@ import "./App.css";
 import Welcome from "./components/Welcome";
 import Jokes from "./components/Jokes";
 import CreateJoke from "./components/CreateJoke";
+import CreateJokes from "./components/CreateJokes";
 import Footer from "./components/Footer";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import useDarkMode from "./hooks/useDarkMode";
@@ -11,17 +12,20 @@ import JokeSlider from "./components/JokeSlider";
 import catValue from "./categoryValue";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
-import Comment from "./components/Comment";
+import Jump from "react-reveal/Jump";
 const App = () => {
   //!Add comment state
   const [comment, setComment] = useState({
     comment: "",
   });
 
+  let joke_id;
+
   const [showComment, setShowComment] = useState(true);
   const toggleComment = () => {
     setShowComment(!showComment);
   };
+
   //!Show modal state
   const [showModal, setShowModal] = useState(false);
 
@@ -51,7 +55,7 @@ const App = () => {
   //!track input create form
   //! select joke category state
   const [createJokeCategory, setCreateJokeCategory] = useState(1);
-
+console.log(createJokeCategory);
   //! form data input joke
   const [createJokeData, setCreateJokeData] = useState({
     punchline: "",
@@ -67,7 +71,6 @@ const App = () => {
   //!response state data
   const [fetchData, setFetchData] = useState([]);
 
-  // console.log(fetchData);
   //!like and dislike joke state
   const [like, setLike] = useState(false);
   const [disLike, setDisLike] = useState(false);
@@ -79,16 +82,11 @@ const App = () => {
     setDisLike(!disLike);
     setLike(false);
   };
-  // const [postJoke, setPostJoke] = useState([]);
+
   //! Dark mode handler
   const toggleDarkMode = (checked) => {
     setColorTheme(colorTheme);
     setDarkMode(checked);
-  };
-
-  //!track selected category value change
-  const handleChange = (e) => {
-    setSelectCategory(e.target.value);
   };
 
   const createJokeHandleChange = (event) => {
@@ -157,6 +155,7 @@ const App = () => {
     }
   };
 
+  console.log(createJokeCategory);
   const handleChangeComment = (event) => {
     const { name, value } = event.target;
     setComment((prevComment) => {
@@ -167,67 +166,50 @@ const App = () => {
     });
   };
 
-  const submitJokeComment = async (event) => {
-    event.preventDefault();
-    const response = await fetch(APIComment, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        joke_id: Math.floor(Math.random() * 35) + 1,
-        comment: comment.comment,
-      }),
-    });
-    if (!response.ok) {
-      throw new Error(response.error);
-    } else {
-      const data = await response.json();
-      console.log(data, response);
-      alert("Comment successfully Added 😎😄😅😎");
-      setComment({
-        comment: "",
-      });
-    }
-  };
-  //!alternative using local storage
-  // const comments = fetchData;
-  // localStorage.setItem("comments", JSON.stringify(comments));
-  // var storedNames = JSON.parse(localStorage.getItem("comments"));
-  let numComments;
-  console.log(numComments);
-  const jokeCommentNum = fetchData.map((el) => {
-    if (el.comments.length !== 0) {
-      if (catIndex === el.id - 1) {
-        if (numComments === "undefined") return (numComments = 0);
-        else numComments = el.comments.length;
-      } else {
-        return console.log("No comments found");
+  const allJokes = fetchData.filter((el) => el.category_id === selectCategory);
+  joke_id = catIndex + 1;
+  // const submitJokeComment = async (event) => {
+  //   event.preventDefault();
+  //   const response = await fetch(APIComment, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       joke_id: joke_id,
+  //       comment: comment.comment,
+  //     }),
+  //   });
+  //   if (!response.ok) {
+  //     throw new Error(response.error);
+  //   } else {
+  //     const data = await response.json();
+  //     console.log(data);
+
+  //     alert("Comment successfully Added 😎😄😅😎");
+  //     setComment({
+  //       comment: "",
+  //     });
+  //   }
+  // };
+
+  // const show = {
+  //   display: `${showComment ? "none" : ""}`,
+  // };
+  const onNewCommentReceived = (newComment) => {
+    console.log(`Data sent is  ${newComment}`);
+
+    const updatedJokes = allJokes.map((joke) => {
+      if (joke.id === newComment.data.joke_id) {
+        joke.comments = [newComment.data, ...joke.comments];
       }
-    }
-  });
-  const jokeComment = fetchData.map((el) => {
-    if (el.comments.length !== 0) {
-      return el.comments.map((cmt) => {
-        if (catIndex === el.id - 1) {
-          return (
-            <article
-              className={`cursor-pointer dark:bg-slate-400 sm:w-full  px-[2rem] mr-0 my-4 py-[0.5rem] shadow rounded-xl flex flex-col`}
-            >
-              <h4 className={`mb-[0.25rem] font-bold`}>
-                @{cmt.commenter.name}
-              </h4>
-              <p className={`mb-[0.75rem]`}>{cmt.comment}</p>
-            </article>
-          );
-        } else {
-          return null;
-        }
-      });
-    }
-  });
-  console.log(fetchData);
+      return joke;
+    });
+    setFetchData(updatedJokes);
+    console.log(updatedJokes);
+  };
+  console.log(createJokeData);
   return (
     <div className="w-full lg:flex min-h-[100vh]">
       {fetchData.length === 0 ? (
@@ -244,12 +226,12 @@ const App = () => {
             toggleDarkMode={toggleDarkMode}
             selectCategory={selectCategory}
             setSelectCategory={setSelectCategory}
-            handleChange={handleChange}
             handleClick={handleClick}
             displayCreateJoke={displayCreateJoke}
             setDisplayCreateJoke={setDisplayCreateJoke}
             isNavBar={isNavBar}
             setIsNavBar={setIsNavBar}
+            setCatIndex={setCatIndex}
           />
           <main className="dark:bg-[#121212] lg:w-4/5">
             <div className="lg:flex justify-between items-center h-16 px-4">
@@ -259,12 +241,14 @@ const App = () => {
                 <span className="pr-4 font-bold text-xl dark:text-white">
                   {isDarkMode ? "Light" : "Dark"}
                 </span>
-                <DarkModeSwitch
-                  // className="sm:hidden md:hidden"
-                  size={35}
-                  checked={isDarkMode}
-                  onChange={toggleDarkMode}
-                />
+                <Jump>
+                  <DarkModeSwitch
+                    // className="sm:hidden md:hidden"
+                    size={35}
+                    checked={isDarkMode}
+                    onChange={toggleDarkMode}
+                  />
+                </Jump>
               </div>
             </div>
 
@@ -274,19 +258,22 @@ const App = () => {
               // catValue={catValue}
               catIndex={catIndex}
               setCatIndex={setCatIndex}
-              fetchData={fetchData}
-              like={like}
-              disLike={disLike}
+              fetchData={allJokes}
+              like={like} //like function
+              disLike={disLike} //dislike function
               thumbsDown={thumbsDown}
               thumbsUp={thumbsUp}
-              jokeComment={jokeComment}
+              // jokeComment={jokeComment}
               showComment={showComment}
               setShowComment={setShowComment}
-              numComments={numComments}
-              comment={comment}
+              // numComments={numComments} //number of comment for joke
+              comment={comment} //comment content
               handleChangeComment={handleChangeComment}
-              submitJokeComment={submitJokeComment}
-              toggleComment={toggleComment}
+              // submitJokeComment={submitJokeComment}
+              toggleComment={toggleComment} // toggle comment show/hide
+              // show={show}
+              setComment={setComment}
+              onNewComment={(newComment) => onNewCommentReceived(newComment)}
             />
             <CreateJoke
               createJokeCategory={createJokeCategory}
@@ -301,24 +288,17 @@ const App = () => {
             />
             {/* //!Joke component from Tablet and Desktop */}
             <div>
-              <JokeSlider
-                selectCategory={selectCategory}
-                catValue={catValue}
-                catIndex={catIndex}
-                setCatIndex={setCatIndex}
-                showModal={showModal}
-                setShowModal={setShowModal}
-                fetchData={fetchData}
-                like={like}
-                disLike={disLike}
-                thumbsDown={thumbsDown}
-                thumbsUp={thumbsUp}
-                jokeComment={jokeComment}
-                showComment={showComment}
-                numComments={numComments}
-                comment={comment}
-                handleChangeComment={handleChangeComment}
-                submitJokeComment={submitJokeComment}
+              <CreateJokes
+                createJokeCategory={createJokeCategory}
+                createJokeData={createJokeData}
+                createJokeHandleChange={createJokeHandleChange}
+                handleCreateDataChange={handleCreateDataChange}
+                displayCreateJoke={displayCreateJoke}
+                setDisplayCreateJoke={setDisplayCreateJoke}
+                handleClick={handleClick}
+                submitJokeData={submitJokeData}
+                closeCreateJoke={closeCreateJoke}
+                // show={show}
               />
               <JokeSlider
                 selectCategory={selectCategory}
@@ -327,18 +307,43 @@ const App = () => {
                 setCatIndex={setCatIndex}
                 showModal={showModal}
                 setShowModal={setShowModal}
-                fetchData={fetchData}
+                fetchData={allJokes}
                 like={like}
                 disLike={disLike}
                 thumbsDown={thumbsDown}
                 thumbsUp={thumbsUp}
-                jokeComment={jokeComment}
+                // jokeComment={jokeComment}
                 showComment={showComment}
-                setShowComment={setShowComment}
-                numComments={numComments}
+                // numComments={numComments}
                 comment={comment}
                 handleChangeComment={handleChangeComment}
-                submitJokeComment={submitJokeComment}
+                // submitJokeComment={submitJokeComment}
+                toggleComment={toggleComment} // toggle comment show/hide
+                // show={show}
+                onNewComment={(newComment) => onNewCommentReceived(newComment)}
+              />
+              <JokeSlider
+                // show={show}
+                selectCategory={selectCategory}
+                catValue={catValue}
+                catIndex={catIndex}
+                setCatIndex={setCatIndex}
+                showModal={showModal}
+                setShowModal={setShowModal}
+                fetchData={allJokes}
+                like={like}
+                disLike={disLike}
+                thumbsDown={thumbsDown}
+                thumbsUp={thumbsUp}
+                // jokeComment={jokeComment}
+                showComment={showComment}
+                setShowComment={setShowComment}
+                // numComments={numComments}
+                comment={comment}
+                handleChangeComment={handleChangeComment}
+                // submitJokeComment={submitJokeComment}
+                toggleComment={toggleComment} // toggle comment show/hide
+                onNewComment={(newComment) => onNewCommentReceived(newComment)}
               />
             </div>
             {/* //!Desktop help component */}
@@ -357,8 +362,3 @@ const App = () => {
 };
 
 export default App;
-
-//  const cmt = storedNames.map((el) => {
-//    if (el.comments.length !== 0)
-//      if (catIndex === el.id) return el.comments.length;
-//  });

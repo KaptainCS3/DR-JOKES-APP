@@ -2,14 +2,73 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import style from "../styles/container.module.css";
 import JokeContainer from "./JokeContainer";
+import JokesContainer from "./JokesContainer";
 import Modal from "./Modal";
+import Comment from "./Comment";
 const JokeSlider = (props) => {
+  const [showComment, setShowComment] = useState(false);
   const showCommentList = () => {
-    props.setShowComment(!props.showComment);
+    setShowComment(!showComment);
   };
+   const show = {
+     display: showComment ? "block" : "none",
+   };
+   const toggleComment = () => {
+     setShowComment(!showComment);
+   };
+  const jokesId = props.fetchData.map((el) => el.id);
   const toggle = () => {
     props.setShowModal(true);
   };
+  const joke = props.fetchData.map((el) => el.id);
+  const jokeComment = props.fetchData.map((el) => {
+    if (el.comments.length !== 0) {
+      if (joke[props.catIndex]) return el.comments;
+      return console.log("No comments found");
+    }
+  });
+
+  const commentList = typeof jokeComment[props.catIndex] !== "undefined";
+  let allComments;
+  if (commentList) {
+    allComments = jokeComment[props.catIndex].map((el) => {
+      return <Comment comment={el.comment} userName={el.commenter.name} />;
+    });
+  }
+
+  const APIComment = `https://api.jokes.digitalrenter.com/api/comments`;
+  const submitJokeComment = async (event) => {
+    event.preventDefault();
+    const response = await fetch(APIComment, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        joke_id: joke[props.catIndex],
+        comment: props.comment.comment,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(response.error);
+    } else {
+      const data = await response.json();
+      props.onNewComment(data);
+      alert("Comment successfully Added 😎😄😅😎");
+      props.setComment({
+        comment: "",
+      });
+    }
+  };
+  let numComments;
+  const jokeCommentNum = props.fetchData.map((el) => {
+    if (el.comments.length !== 0) {
+      if (joke[props.catIndex]) return (numComments = el.comments.length);
+      return console.log("No comments found");
+    }
+  });
+
   const [width, setWidth] = useState(0);
   const carousel = useRef();
 
@@ -19,6 +78,17 @@ const JokeSlider = (props) => {
         punchline={el.punchline}
         setup={el.setup}
         toggle={toggle}
+        key={el.id}
+      />
+    );
+  });
+  const objectModal = props.fetchData.map((el) => {
+    return (
+      <JokesContainer
+        punchline={el.punchline}
+        setup={el.setup}
+        toggle={toggle}
+        key={el.id}
       />
     );
   });
@@ -27,7 +97,8 @@ const JokeSlider = (props) => {
     setTimeout(() => {
       setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
     }, 3000);
-  }, []);
+  });
+
   return (
     <div className="sm:hidden">
       <motion.div
@@ -47,7 +118,8 @@ const JokeSlider = (props) => {
             <Modal
               showModal={props.showModal}
               setShowModal={props.setShowModal}
-              object={object}
+              showComment={props.showComment}
+              objectModal={objectModal}
               catIndex={props.catIndex}
               setCatIndex={props.setCatIndex}
               like={props.like}
@@ -55,10 +127,13 @@ const JokeSlider = (props) => {
               thumbsDown={props.thumbsDown}
               thumbsUp={props.thumbsUp}
               showCommentList={showCommentList}
-              numComments={props.numComments}
+              allComments={allComments}
+              numComments={jokeCommentNum[props.catIndex]}
               comment={props.comment}
               handleChangeComment={props.handleChangeComment}
               submitJokeComment={props.submitJokeComment}
+              toggleComment={toggleComment}
+              show={show}
             />
             {/* flex justify-center items-center w-64 h-64 my-16 rounded-xl shadow-2xl flex-col mr-4 */}
           </motion.div>

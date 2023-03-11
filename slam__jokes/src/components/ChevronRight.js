@@ -10,7 +10,7 @@ const ChevronRight = (props) => {
       >
         <FontAwesomeIcon
           icon={faChevronRight}
-          className={`cursor-pointer text-2xl`}
+          className={`cursor-pointer text-3xl`}
           onClick={props.nextJoke}
         />
       </div>

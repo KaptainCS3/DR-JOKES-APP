@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faChevronDown,
-  faClose,
-} from "@fortawesome/free-solid-svg-icons";
-// import DropDown from "./DropDown";
+import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import CategorySelect from "./CategorySelect";
-import CreateJoke from "./CreateJoke";
+import Fade from "react-reveal/Fade";
+import Spin from "react-reveal/Spin";
+import Jump from "react-reveal/Jump";
 const Nav = (props) => {
   const showForm = () => {
     props.handleClick();
@@ -33,11 +30,15 @@ const Nav = (props) => {
           onClick={showNav}
         />
       </div>
-      <h1 className="font-bold cursor-pointer lg:h-1/6">
-        <span className="text-xl text-[#03DAC6] dark:text-gray-200">Slam</span>{" "}
-        <span className="text-xl text-white dark:text-gray-200">Jokes</span>
-        <sup className="text-xl text-white dark:text-gray-200">++</sup>
-      </h1>
+      <Spin>
+        <h1 className="font-bold cursor-pointer lg:h-1/6">
+          <span className="text-xl text-[#03DAC6] dark:text-gray-200">
+            Slam
+          </span>{" "}
+          <span className="text-xl text-white dark:text-gray-200">Jokes</span>
+          <sup className="text-xl text-white dark:text-gray-200">++</sup>
+        </h1>
+      </Spin>
       {/* toggle open nav bar*/}
       <div
         className={
@@ -57,25 +58,29 @@ const Nav = (props) => {
               {/* <DropDown /> */}
               <p className="pt-4">
                 <CategorySelect
-                  handleChange={props.handleChange}
+                  setCatIndex={props.setCatIndex}
                   selectCategory={props.selectCategory}
-                  setSelectedCategory={props.setSelectedCategory}
+                  setSelectCategory={props.setSelectCategory}
                 />
               </p>
-              <button className="pt-4" onClick={showForm}>
-                Create Jokes
-              </button>
+              <Fade left>
+                <button className="pt-4" onClick={showForm}>
+                  Create Jokes
+                </button>
+              </Fade>
               <p className="pt-4 flex cursor-pointer">
                 {/* toggle dark mode */}
                 <span className="pr-2">
                   {props.isDarkMode ? "Light" : "Dark"}
                 </span>
-                <DarkModeSwitch
-                  style={{ marginBottom: "2rem" }}
-                  checked={props.isDarkMode}
-                  onChange={props.toggleDarkMode}
-                  size={24}
-                />
+                <Jump>
+                  <DarkModeSwitch
+                    style={{ marginBottom: "2rem" }}
+                    checked={props.isDarkMode}
+                    onChange={props.toggleDarkMode}
+                    size={24}
+                  />
+                </Jump>
               </p>
             </div>
             <p className="mt-[20rem]">Settings</p>
@@ -88,27 +93,33 @@ const Nav = (props) => {
         className={`table__view w-[75%] text-white dark:text-gray-300 font-bold flex justify-between sm:hidden lg:hidden`}
       >
         <div className="flex w-full justify-evenly">
-          <button className="flex items-center">
-            Create Joke
-            <CreateJoke />
-          </button>
+          <Fade left>
+            <button className="flex items-center" onClick={showForm}>
+              Create Joke
+            </button>
+          </Fade>
           <button>
             <CategorySelect
-              handleChange={props.handleChange}
+              // handleChange={props.handleChange}
+              setCatIndex={props.setCatIndex}
               selectCategory={props.selectCategory}
-              setSelectedCategory={props.setSelectedCategory}
+              setSelectCategory={props.setSelectCategory}
             />
           </button>
-          <button>Settings</button>
+          <Fade left>
+            <button>Settings</button>
+          </Fade>
         </div>
         <div className="mode flex items-center">
           {/* toggle dark mode */}
           <span className="pr-2">{props.isDarkMode ? "Light" : "Dark"}</span>
-          <DarkModeSwitch
-            checked={props.isDarkMode}
-            onChange={props.toggleDarkMode}
-            size={30}
-          />
+          <Jump>
+            <DarkModeSwitch
+              checked={props.isDarkMode}
+              onChange={props.toggleDarkMode}
+              size={30}
+            />
+          </Jump>
         </div>
       </div>
 
@@ -116,32 +127,42 @@ const Nav = (props) => {
 
       <div className="hamburger__menu text-white h-full flex flex-col justify-between md:hidden sm:hidden">
         <div>
-          <button className="block">
-            Create Joke
-            <CreateJoke />
-          </button>
+          <Fade left>
+            <button className="block" onClick={showForm}>
+              Create Joke
+            </button>
+          </Fade>
           <button className="block">
             <CategorySelect
-              handleChange={props.handleChange}
+              // handleChange={props.handleChange}
+              setCatIndex={props.setCatIndex}
               selectCategory={props.selectCategory}
-              setSelectedCategory={props.setSelectedCategory}
+              setSelectCategory={props.setSelectCategory}
             />
           </button>
-          <button className="block">Settings</button>
+          <Fade left>
+            <button className="block">Settings</button>
+          </Fade>
         </div>
         <div>
           <div className="text-white">
-            <p>
-              <button>About</button>
-            </p>
-            <p>
-              {" "}
-              <button>Contact Us</button>
-            </p>
-            <p>
-              {" "}
-              <button>Terms and conditions</button>
-            </p>
+            <Fade left>
+              <p>
+                <button>About</button>
+              </p>
+            </Fade>
+            <Fade left>
+              <p>
+                {" "}
+                <button>Contact Us</button>
+              </p>
+            </Fade>
+            <Fade left>
+              <p>
+                {" "}
+                <button>Terms and conditions</button>
+              </p>
+            </Fade>
           </div>
         </div>
       </div>
