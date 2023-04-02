@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faPlus } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/placeholder.module.css";
