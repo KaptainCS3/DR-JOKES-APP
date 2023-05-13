@@ -107,3 +107,4 @@
     return el.id;
   });
   console.log(values[catIndex]);
+
